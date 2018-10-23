@@ -1,0 +1,52 @@
+\documentclass[a4paper,10pt]{article}
+%\documentclass[a4paper,10pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[table]{xcolor}
+
+\usepackage{listings}
+\usepackage{makecell}
+
+\lstset{language=C,morekeywords={printf}, keywordstyle=\color{red}}
+
+\title{C Cheatsheet}
+\author{}
+\date{}
+
+
+\pdfinfo{%
+  /Title    (C Cheatsheet)
+  /Author   (Pascal Scholz)
+  /Creator  ()
+  /Producer ()
+  /Subject  ()
+  /Keywords ()
+}
+
+\begin{document}
+\maketitle
+\section{Formatstring printf()}
+
+\begin{lstlisting}
+printf(%[flags][width][.percision][length]type);
+\end{lstlisting} 
+
+\begin{center}
+   \rowcolors{1}{white}{yellow}
+        \begin{tabular}{|c|l|}
+        \hline
+            Flag   & Beschreibung\\
+        \hline
+            -               & Linksausrichten der Ausgabe innerhalb des Platzhalters\\
+            +               & Stellt positiven Zahlen ein Vorzeichen voran.\\
+            (Leerzeichen)   & Stellt positiven Zahlen ein Leerzeichen voran\\
+            0               & Platzhalter wird mit Nullen aufgefüllt (anstatt Leerzeichen)\\
+            \verb|#|        & \makecell[l]{ Für G und g Typen: Nachfolgende Nullen werden nicht entfernt.\\
+                            Für F, f, e, E, g, G Typen: Output enthält immer einen '.' für Nachkommstellen.\\
+                            Für o, x, X Typen: Die Texte 0, 0x, 0X }\\ 
+        \hline
+        \end{tabular}
+    \end{center}
+\section{Primitive Datentypen}
+
+\end{document}
