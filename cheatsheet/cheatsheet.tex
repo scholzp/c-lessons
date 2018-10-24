@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{scrartcl}
+\documentclass[a4paper,10pt]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[table]{xcolor}
@@ -9,8 +9,10 @@
 %to use lineending in cells
 \usepackage{makecell}
 
+\usepackage{typearea}
+\usepackage[a4paper,left=2cm,right=2cm,top=2.5cm,bottom=2cm,bindingoffset=5mm]{geometry}
 \lstset{language=C,morekeywords={printf}, keywordstyle=\color{red}}
-\definecolor{LightYellow}{rgb}{1,1,0.7}
+\definecolor{LightYellow}{rgb}{1,1,0.85}
 
 \title{C Cheatsheet}
 \author{}
@@ -27,17 +29,18 @@
 }
 
 \begin{document}
-\maketitle
+{\LARGE C-Cheatsheet}
 \begin{lstlisting}
 printf(%[flags][width][.percision][length]type);
 \end{lstlisting} 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %flags
 \begin{center}
     \rowcolors{1}{white}{LightYellow}
-        \begin{tabular}{|c|l|}
+    \begin{tabular}{|c|l|}
         \hline
-        \multicolumn{2}{|c|}{Possible Flags} \\
+        \multicolumn{2}{|c|}{Mögliche Flags} \\
         \hline
             Flag   & Beschreibung\\
         \hline
@@ -46,34 +49,35 @@ printf(%[flags][width][.percision][length]type);
             (Leerzeichen)   & Stellt positiven Zahlen ein Leerzeichen voran\\
             0               & Platzhalter wird mit Nullen aufgefüllt (anstatt Leerzeichen)\\
             \verb|#|        & \makecell[l]{ Für G und g Typen: Nachfolgende Nullen werden nicht
-                            entfernt.\\
-                            Für F, f, e, E, g, G Typen: Output enthält immer einen '.' für Nachkommstellen.\\
+                            entfernt.
+                            Für F, f, e, E, g, G\\ Typen: Output enthält immer einen '.' \\für Nachkommstellen.
                             Für o, x, X Typen: Die Texte 0, 0x, 0X.}\\ 
         \hline
     \end{tabular}
 \end{center}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %width field
 \begin{center}
     \rowcolors{1}{white}{LightYellow}
-        \begin{tabular}{|c|l|}
+    \begin{tabular}{|c|l|}
         \hline
         \multicolumn{2}{|c|}{Width Feld} \\
         \hline
             Zeichen   & Beschreibung\\
         \hline
             n (Gannzahl)    &  \makecell[l]{ Definiert, dass der ausgeben Parameter (in
-                            Kombination mit d, f,..) mindestens \\die Länge n hat. Sollte er  weniger Zeichen haben, wird nach links mit Füllzeichen \\(Standard Leezeichen, mit Flag 0 mit Nullen) aufgefüllt.}\\ 
+                            Kombination  mit d, f,..) mindestens die \\Länge n hat. Sollte er  weniger Zeichen haben, wird nach links mit Füllzeichen \\(Standard Leezeichen, mit Flag 0 mit Nullen) aufgefüllt.}\\ 
             \verb|*|d       &  \makecell[l]{Siehe Zeile drüber. Einziger Unterschied, dass der
                             Wert nun in einer Variable steht.}\\ 
         \hline
     \end{tabular}
 \end{center}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 %percision field
 \begin{center}
     \rowcolors{1}{white}{LightYellow}
-        \begin{tabular}{|c|l|}
+    \begin{tabular}{|c|l|}
+
         \hline
         \multicolumn{2}{|c|}{Precision Feld} \\
         \hline
@@ -86,25 +90,76 @@ printf(%[flags][width][.percision][length]type);
         \hline
     \end{tabular}
 \end{center}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %length field
 \begin{center}
     \rowcolors{1}{white}{LightYellow}
-        \begin{tabular}{|c|l|}
+    \begin{tabular}{|c|l|}
         \hline
         \multicolumn{2}{|c|}{Length Feld} \\
         \hline
             Zeichen   & Beschreibung\\
         \hline
-            hh             & Bewirkt, dass printf ein Gannzahl-Argument  erwartet, welches so groß ist wie ein int aber von einem char bereitsgestellt wird.\\
-            h              & Bewirkt, dass printf ein Gannzahl-Argument erwartet, welches so groß ist wie ein int aber von einem short bereitsgestellt wird.\\
-            %TODO
-            l              & Bewirkt, dass printf ein Gannzahl-Argument erwartet, welches so groß ist wie ein int aber von einem short bereitsgestellt wird.\\
-            \verb|*|d      &  \makecell[l]{Siehe Zeile drüber. Einziger Unterschied, dass der
-                            Wert nun in einer Variable steht.}\\ 
+            hh             & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument  erwartet,
+                            welches so groß ist wie ein int aber \\von einem char bereitsgestellt wird.}\\
+            h              & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument erwartet,
+                            welches so groß ist wie ein int aber\\ von einem short bereitsgestellt wird.}\\
+            l              & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument von der Größe eines    
+                            long erwartet}\\
+            ll             & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument von der Größe eines    
+                            long long erwartet}\\
+            L              & \makecell[l]{Bewirkt, dass printf ein Fließkomma-Argument erwartet,
+                            welches so groß ist wie ein long \\double}\\
+            z              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein size\_t.}\\
+            j              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein intmax\_t.}\\
+            t              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein ptrdiff\_t.}\\
         \hline
     \end{tabular}
 \end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%type field TODO
+\begin{center}
+    \rowcolors{1}{white}{LightYellow}
+    \begin{tabular}{|c|l|}
+        \hline
+        \multicolumn{2}{|c|}{Typ Feld} \\
+        \hline
+            Zeichen   & Beschreibung\\
+        \hline
+            \verb|%|       & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument  erwartet,
+                            welches so groß ist wie ein int aber \\von einem char bereitsgestellt wird.}\\
+            d, i           & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument erwartet,
+                            welches so groß ist wie ein int aber\\ von einem short bereitsgestellt wird.}\\
+            u              & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument von der Größe eines    
+                            long erwartet}\\
+            f, F           & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument von der Größe eines    
+                            long long erwartet}\\
+            e, E           & \makecell[l]{Bewirkt, dass printf ein Fließkomma-Argument erwartet,
+                            welches so groß ist wie ein long \\double}\\
+            g, G           & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein size\_t.}\\
+            x, X           & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein intmax\_t.}\\
+            o              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein ptrdiff\_t.}\\
+            s              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein ptrdiff\_t.}\\  
+            c              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein ptrdiff\_t.}\\ 
+            p              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein ptrdiff\_t.}\\
+            a, A           & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein ptrdiff\_t.}\\
+            n              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein ptrdiff\_t.}\\
+        \hline
+    \end{tabular}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Das Lenght-Feld wird benutz um die Größe des Datentypes zu übermitteln. Wird es frei gelassen, wird dieses aus dem Typen ermittelt
     
 \section{Primitive Datentypen}
