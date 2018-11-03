@@ -6,12 +6,18 @@
 \usepackage{color, colortbl}
 %listings for Code
 \usepackage{listings}
+\usepackage{array}
+\usepackage{tabularx}
+
 %to use lineending in cells
 \usepackage{makecell}
-
+\usepackage{multirow}
 \usepackage{typearea}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
 \usepackage[a4paper,left=2cm,right=2cm,top=2.5cm,bottom=2cm,bindingoffset=5mm]{geometry}
-\lstset{language=C,morekeywords={printf}, keywordstyle=\color{red}}
+\lstset{language=C, morekeywords={printf}, keywordstyle=\color{red}}
 \definecolor{LightYellow}{rgb}{1,1,0.85}
 
 \title{C Cheatsheet}
@@ -30,6 +36,9 @@
 
 \begin{document}
 {\LARGE C-Cheatsheet}
+
+\section{Printf Formatstring}
+
 \begin{lstlisting}
 printf(%[flags][width][.percision][length]type);
 \end{lstlisting} 
@@ -38,7 +47,7 @@ printf(%[flags][width][.percision][length]type);
 %flags
 \begin{center}
     \rowcolors{1}{white}{LightYellow}
-    \begin{tabular}{|c|l|}
+    \begin{tabularx}{\textwidth}{|l|X|}
         \hline
         \multicolumn{2}{|c|}{Mögliche Flags} \\
         \hline
@@ -48,120 +57,158 @@ printf(%[flags][width][.percision][length]type);
             +               & Stellt positiven Zahlen ein Vorzeichen voran.\\
             (Leerzeichen)   & Stellt positiven Zahlen ein Leerzeichen voran\\
             0               & Platzhalter wird mit Nullen aufgefüllt (anstatt Leerzeichen)\\
-            \verb|#|        & \makecell[l]{ Für G und g Typen: Nachfolgende Nullen werden nicht
+            \#              & Für G und g Typen: Nachfolgende Nullen werden nicht
                             entfernt.
-                            Für F, f, e, E, g, G\\ Typen: Output enthält immer einen '.' \\für Nachkommstellen.
-                            Für o, x, X Typen: Die Texte 0, 0x, 0X.}\\ 
+                            Für F, f, e, E, g, G Typen: Output enthält immer einen '.' für Nachkommstellen.
+                            Für o, x, X Typen: Die Texte 0, 0x, 0X.\\ 
         \hline
-    \end{tabular}
+    \end{tabularx}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %width field
 \begin{center}
     \rowcolors{1}{white}{LightYellow}
-    \begin{tabular}{|c|l|}
+    \begin{tabularx}{\textwidth}{|l|X|}
         \hline
         \multicolumn{2}{|c|}{Width Feld} \\
         \hline
             Zeichen   & Beschreibung\\
         \hline
-            n (Gannzahl)    &  \makecell[l]{ Definiert, dass der ausgeben Parameter (in
-                            Kombination  mit d, f,..) mindestens die \\Länge n hat. Sollte er  weniger Zeichen haben, wird nach links mit Füllzeichen \\(Standard Leezeichen, mit Flag 0 mit Nullen) aufgefüllt.}\\ 
-            \verb|*|d       &  \makecell[l]{Siehe Zeile drüber. Einziger Unterschied, dass der
-                            Wert nun in einer Variable steht.}\\ 
+            n (Gannzahl)    & Definiert, dass der ausgeben Parameter (in
+                            Kombination  mit d, f,..) mindestens die Länge n hat. Sollte er  weniger Zeichen haben, wird nach links mit Füllzeichen (Standard Leezeichen, mit Flag 0 mit Nullen) aufgefüllt.\\ 
+            \verb|*|d       & Siehe Zeile drüber. Einziger Unterschied, dass der
+                            Wert nun in einer Variable steht.\\ 
         \hline
-    \end{tabular}
+    \end{tabularx}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 %percision field
 \begin{center}
     \rowcolors{1}{white}{LightYellow}
-    \begin{tabular}{|c|l|}
+    \begin{tabularx}{\textwidth}{|l|X|}
 
         \hline
         \multicolumn{2}{|c|}{Precision Feld} \\
         \hline
             Zeichen   & Beschreibung\\
         \hline
-            n (Gannzahl)    &  \makecell[l]{ Definiert, dass der ausgeben Parameter (in
-                            Kombination mit d, f,..) maximal \\die Länge n hat. Sollte er mehr Zeichen haben, werden diese abgeschnitten \\(Standard Leezeichen, mit Flag 0 mit Nullen) aufgefüllt.}\\ 
-            \verb|*|d      &  \makecell[l]{Siehe Zeile drüber. Einziger Unterschied, dass der
-                            Wert nun in einer Variable steht.}\\ 
+            n (Gannzahl)    &   Definiert, dass der ausgeben Parameter (in
+                            Kombination mit d, f,..) maximal die Länge n hat. Sollte er mehr Zeichen haben, werden diese abgeschnitten (Standard Leezeichen, mit Flag 0 mit Nullen) aufgefüllt.\\ 
+            \verb|*|d      &  Siehe Zeile drüber. Einziger Unterschied, dass der
+                            Wert nun in einer Variable steht.\\ 
         \hline
-    \end{tabular}
+    \end{tabularx}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %length field
+Das Lenght-Feld wird benutz um die Größe des Datentypes zu übermitteln. Wird es frei gelassen, wird dieses aus dem Typen ermittelt.
 \begin{center}
-    \rowcolors{1}{white}{LightYellow}
-    \begin{tabular}{|c|l|}
+    \rowcolors{1}{white}{LightYellow}    
+    \begin{tabularx}{\textwidth}{|l|X|}
         \hline
         \multicolumn{2}{|c|}{Length Feld} \\
         \hline
             Zeichen   & Beschreibung\\
         \hline
-            hh             & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument  erwartet,
-                            welches so groß ist wie ein int aber \\von einem char bereitsgestellt wird.}\\
-            h              & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument erwartet,
-                            welches so groß ist wie ein int aber\\ von einem short bereitsgestellt wird.}\\
-            l              & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument von der Größe eines    
-                            long erwartet}\\
-            ll             & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument von der Größe eines    
-                            long long erwartet}\\
-            L              & \makecell[l]{Bewirkt, dass printf ein Fließkomma-Argument erwartet,
-                            welches so groß ist wie ein long \\double}\\
-            z              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein size\_t.}\\
-            j              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein intmax\_t.}\\
-            t              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein ptrdiff\_t.}\\
+            hh             & Bewirkt, dass printf ein Gannzahl-Argument  erwartet,
+                            welches so groß ist wie ein int aber von einem char bereitsgestellt wird.\\
+            h              & Bewirkt, dass printf ein Gannzahl-Argument erwartet,
+                            welches so groß ist wie ein int aber von einem short bereitsgestellt wird.\\
+            l              & Bewirkt, dass printf ein Gannzahl-Argument von der Größe eines    
+                            long erwartet\\
+            ll             & Bewirkt, dass printf ein Gannzahl-Argument von der Größe eines    
+                            long long erwartet\\
+            L              & Bewirkt, dass printf ein Fließkomma-Argument erwartet,
+                            welches so groß ist wie ein long double\\
+            z              & Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein size\_t.\\
+            j              & Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein intmax\_t.\\
+            t              & Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
+                            welches so groß ist wie ein ptrdiff\_t.\\
         \hline
-    \end{tabular}
+    \end{tabularx}
 \end{center}
+
+\begin{figure}[H]
+  \caption{Printf Beispiel.}
+  \centering
+    \includegraphics[width=.8\textwidth]{printf}
+    \\
+  \href{https://commons.wikimedia.org/wiki/File:Printf.svg}{Quelle: Wikipedia, abgerufen am 02.11.2018}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%type field TODO
 \begin{center}
     \rowcolors{1}{white}{LightYellow}
-    \begin{tabular}{|c|l|}
+    \begin{tabularx}{\textwidth}{|l|X|}
         \hline
-        \multicolumn{2}{|c|}{Typ Feld} \\
+        \multicolumn{2}{|c|}{Typ Feld (Format Specifier)} \\
         \hline
             Zeichen   & Beschreibung\\
         \hline
-            \verb|%|       & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument  erwartet,
-                            welches so groß ist wie ein int aber \\von einem char bereitsgestellt wird.}\\
-            d, i           & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument erwartet,
-                            welches so groß ist wie ein int aber\\ von einem short bereitsgestellt wird.}\\
-            u              & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument von der Größe eines    
-                            long erwartet}\\
-            f, F           & \makecell[l]{Bewirkt, dass printf ein Gannzahl-Argument von der Größe eines    
-                            long long erwartet}\\
-            e, E           & \makecell[l]{Bewirkt, dass printf ein Fließkomma-Argument erwartet,
-                            welches so groß ist wie ein long \\double}\\
-            g, G           & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein size\_t.}\\
-            x, X           & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein intmax\_t.}\\
-            o              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein ptrdiff\_t.}\\
-            s              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein ptrdiff\_t.}\\  
-            c              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein ptrdiff\_t.}\\ 
-            p              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein ptrdiff\_t.}\\
-            a, A           & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein ptrdiff\_t.}\\
-            n              & \makecell[l]{Bewirkt, dass printf ein Ganzzahl-Argument erwartet,
-                            welches so groß ist wie ein ptrdiff\_t.}\\
+            \%       & Gibt einfach ein \% aus.\\
+            d, i           & Zusammen mit einem übergebenen Wert vom Typ \textit{int} wird eine vorzeichenbehaftete
+                             Dezimalzahl ausgegeben.\\
+            u              & Gibt vorzeichenlose Dezimalzahl aus.\\
+            f, F           & Stellt Werte vom Typ \textit{doulbe} als Festkommezahl dar.\\
+            e, E           & Für \textit{doulbe} Werte. Stellt diese im wissenschaftlichen Format mit Exponent dar.
+                             e oder E unterscheiden nur den Buchstaben, der für den Exponent verwendet wird. Der Exponent hat immer mindestens 2 Zeichen, unter Windows 3.\\
+            g, G           & Für Werte vom typ \textit{double}. Wählt je nach Größe entweder die Festkomma- oder die
+                            wissenschaftliche (mit Exponent) Darstellung \\
+            x, X           & Gibt einen \textit{unsigned int} als Hexadezimalzahl aus.\\
+            o              & Gibt einen \textit{unsigned int} als Octalzahl aus.\\
+            s              & Für einen Null-terminieten String.\\  
+            c              & Gibt ein Zeichen vom Typ \textit{char} aus.\\ 
+            p              & Gibt die Adresse eine Pointers aus.\\
+            a, A           & Gibt einen Wert vom Typ \textit{double} im als Hexadezimalzahl aus.\\
+            n              & Keine Ausgabe. Schreibt Anzahl erfolgreich ausgegebener Zeichen in einen Pointer des
+                             Typs \textit{int}\\
         \hline
-    \end{tabular}
+    \end{tabularx}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Das Lenght-Feld wird benutz um die Größe des Datentypes zu übermitteln. Wird es frei gelassen, wird dieses aus dem Typen ermittelt
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
     
-\section{Primitive Datentypen}
+\section{Basisdatentypen in C}
+\begin{center}
+    \rowcolors{1}{white}{LightYellow}
+    \begin{tabularx}{\textwidth}{|L{3.5cm}|L{1.3cm}|X|}
+        \hline
+        \multicolumn{3}{|c|}{Datentypen in C} \\
+        \hline
+            Typ  & Specifier & Beschreibung \\
+        \hline
+            char               &\%c       & Kleinster Datentyp. Enthält eine Ganzzahl, die \textit{signed} oder
+                                            \textit{unsigned} sein kann.\\ 
+            singed char        &\%c       & Gleiche Größe wie \textit{char}, aber vorzeichenbehaftet. Wertebereich
+                                            ist min. -127 bis 127.\\ 
+            unsinged char      &\%c       & Gleiche Größe wie \textit{char}, aber vorzeichenlos. Wertebereich
+                                            ist min. 0 bis 255.\\
+            \mbox{short}, \mbox{short int}, \mbox{signed short}, \mbox{signed short int}
+                               &\%hi      & Ganzzahldatentypen mit Wertebereich von -32.767 bis +32.767.\\
+            \mbox{unsigned short}, \mbox{unsigned short int}, \mbox{unsigned}
+                               &\%hu      & Ganzzahldatentypen mit Wertebereich von 0 bis +65.535.\\
+            \mbox{int}, \mbox{signed}, \mbox{signed int}
+                       &\%i oder \%d      & Basisdatentyp für vorzeichenbehaftete Ganzahlen.\\
+            \mbox{long}, \mbox{long int}, \mbox{signed long}, \mbox{signed long int}
+                               &\%li      & Vorzeichenbehafteter Ganzzahldatentypen mit Wertebereich von min. -2.147.483.647 bis +2.147.483.647.\\
+            \mbox{unsigned long}, \mbox{unsigned long int}
+                               &\%lu      & Ganzzahldatentypen mit Wertebereich von min. 0 bis +4.294.967.295.\\
+            \mbox{long long}, \mbox{long long int}, \mbox{signed long long}, \mbox{signed long long int}
+                               &\%li      & Vorzeichenbehafteter Ganzzahldatentypen mit Wertebereich von min. -9.223.372.036.854.775.807 bis +9.223.372.036.854.775.807.\\
+            \mbox{unsigned long long}, \mbox{unsigned long long int}
+                               &\%lu      & Ganzzahldatentypen mit Wertebereich von min. 0 bis
+                               +18.446.744.073.709.551.615.\\
+            float               &\%f       & Typ für Gleitkommazahlen, meistens einfach Genauigkeit
+                                                                nach IEEE 754 (32 Bit)\\ 
+            double              &\%lf       & Typ für Gleitkommazahlen, meistens doppelte Genauigkeit
+                                                                nach IEEE 754 (64 Bit)\\
+            long double         &\%Lf       & Typ für Gleitkommazahlen, mit erweiterter Genauigkeit. Größe ist       
+                                            implementierungsabhängig, aber min. so groß wie \textit{double}.\\
+        \hline
+    \end{tabularx}
+\end{center}
 
 \end{document}
