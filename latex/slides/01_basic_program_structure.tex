@@ -27,10 +27,10 @@
 \begin{frame}{Contents}
 	\tableofcontents
 \end{frame}
-
+%----------------------------------------------------------------------------
 \section{Setup}
 \subsection{}
-
+%----------------------------------------------------------------------------
 \begin{frame}{Getting started}
 	The slides are at \href{https://fsr.github.io/c-lessons/materials.html}{fsr.github.io/c-lessons/materials.html}\\
 	\bigskip
@@ -41,6 +41,7 @@
 	In case of big trouble, write an e-mail to your tutor.\\
 \end{frame}
 
+%----------------------------------------------------------------------------
 \begin{frame}{Programs for programming}
 	For developing our own programs, we will use two kinds of software:\\
 	\bigskip
@@ -58,25 +59,30 @@
 	\end{itemize}
 \end{frame}
 
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide = singleslide]{gcc for Unix-based operating systems}
+	You maybe have to update your system before the installation\verb|!| \\
 	Ubuntu / Debian:
 	\begin{lstlisting}[numbers=none]
+$ sudo apt-get update
 $ sudo apt-get install gcc
-\end{lstlisting}
+    \end{lstlisting}
 	\bigskip
 	Arch Linux:
 	\begin{lstlisting}[numbers=none]
+$ sudo pacman -Syu
 $ sudo pacman -S gcc
-\end{lstlisting}
+    \end{lstlisting}
 	\bigskip
 	Mac OS X:
 	\begin{lstlisting}[numbers=none]
 $ brew install gcc
-\end{lstlisting}
+    \end{lstlisting}
 	\bigskip
 	... and you're done ;-)
 \end{frame}
 
+%----------------------------------------------------------------------------
 \begin{frame}{gcc for Windows 10 (using \textit{bash})}
 	For convenience you should use the new Ubuntu-based Linux subsystem.\\
 	\bigskip
@@ -86,6 +92,7 @@ $ brew install gcc
 		\item In the \textit{Control panel}, go to \textit{Programs} $>$ \textit{Turn Windows Features On or Off}
 			and enable the \textit{Windows Subsystem for Linux (Beta)}
 		\item Reboot as you're prompted
+		\item Go to the Microsoft store and search for Ubuntu and install the app
 		\item Search for ``bash'' and run the \textit{bash} command
 		\item Follow the installation instructions
 	\end{itemize}
@@ -93,6 +100,7 @@ $ brew install gcc
 	You may now continue as if you were using Ubuntu ;-)
 \end{frame}
 
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{gcc for older versions of Windows (using \textbf{cygwin})}
 	We highly recommend using the \href{https://chocolatey.org/}{Chocolatey} package manager.\\
 	\begin{itemize}
@@ -100,27 +108,33 @@ $ brew install gcc
 	\end{itemize}
 	\bigskip
 	Install cygwin (launch the shell as an administrator!):
+	
 	\begin{lstlisting}[numbers=none]
 $ choco install cygwin
 $ choco install cyg-get
-\end{lstlisting}
+    \end{lstlisting}
+    
 	\bigskip
 	Install gcc and optionally vim: {\scriptsize(\href{https://github.com/chocolatey/chocolatey-coreteampackages/issues/176#issuecomment-212939458}{How to fix the "Cannot find file" error})}
+	
 	\begin{lstlisting}[numbers=none]
 $ cyg-get gcc-core vim
-\end{lstlisting}
+    \end{lstlisting}
 	\bigskip
 	Now start \textit{cygwin} to get a command line similar to Unix.
 \end{frame}
 
 \section{Hello World!}
 \subsection{}
+
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{The first program}
 	\begin{itemize}
 		\item Create a new file named ``\textbf{main.c}''.
 		\item Open it in your text editor of choice.
 		\item Fill it as follows:
 	\end{itemize}
+	
 	\begin{lstlisting}
 #include <stdio.h>
 
@@ -131,7 +145,10 @@ int main(void) {
 	return 0;
 }
 \end{lstlisting}
+
 \end{frame}
+
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{From source to binary}
 	\centering
 	Source code\\\ \\
@@ -156,8 +173,11 @@ $ ./a.exe
 \end{lstlisting}
 	\end{columns}
 \end{frame}
+%----------------------------------------------------------------------------
 \section{Program structure}
 \subsection{}
+
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{A basic program}
 	\begin{columns}[T]
 		\column{.6\textwidth}
@@ -179,6 +199,8 @@ int main(void) {
 		\ \\\ \\$\left. \begin{array}{c}\\\\\\\\\\\\\end{array}\right\rbrace $ Main function
 	\end{columns}
 \end{frame}
+
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{Preprocessor statements}
 	\begin{itemize}
 		\item Processed before compilation
@@ -196,6 +218,8 @@ int main(void) {
 	\bigskip
 	In this course, we will use them for inclusions only.
 \end{frame}
+
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{The main function}
 	\begin{itemize}
 		\item Core function of every program
@@ -212,6 +236,8 @@ int main(void) {
 		\item '$\lbrace$' marks the start of the main function scope
 	\end{itemize}
 \end{frame}
+
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{The main function scope}
 	\begin{itemize}
 		\item Contains program statements
@@ -229,6 +255,8 @@ int main(void) {
 		\item '$\rbrace$' marks the end of the main function scope
 	\end{itemize}
 \end{frame}
+
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{Statements}
 	\begin{itemize}
 		\item Instructions for the computer
@@ -248,6 +276,8 @@ int main(void) {
 		\item All statements are located in function blocks
 	\end{itemize}
 \end{frame}
+
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{Comments}
 	\begin{itemize}
 		\item Information for you and others who use your code
@@ -275,6 +305,8 @@ int main(void) {
 \end{frame}
 \section{Style}
 \subsection{}
+
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{A few words on style}
 	\begin{itemize}
 		\item There can be multiple statements on one line
@@ -293,6 +325,8 @@ main	(        void ){printf("Hello World!\n");
 \end{lstlisting}
 	\end{uncoverenv}
 \end{frame}
+
+%----------------------------------------------------------------------------
 \begin{frame}[fragile = singleslide]{Write enjoyable code}
 	\begin{itemize}
 		\item Put each statement onto its own line
@@ -310,8 +344,8 @@ int main(void) {
 	return 0;
 }
 \end{lstlisting}
+%----------------------------------------------------------------------------
 \end{frame}
-
 
 % nothing to do from here on
 \end{document}
