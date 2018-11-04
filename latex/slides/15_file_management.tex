@@ -23,7 +23,7 @@
 \section{File descriptors}
 \subsection{}
 
-\begin{frame}[fragile]{Describing a file}
+\begin{frame}[fragile = singleslide]{Describing a file}
 	The basic way to handle files in C is to use the interface with your operating system on a very low level.\\
 	Each process has its own set of \textbf{file descriptors} - arbitrary integer numbers that represent a file.\\ \bigskip
 	To open a file and get a descriptor use the system call function \textit{open()}:\\
@@ -38,7 +38,7 @@ int myfile = open("savestate", O_RDWR);
 
 \end{frame}
 
-\begin{frame}[fragile]{Write and read}
+\begin{frame}[fragile = singleslide]{Write and read}
 	For actually putting data into a file, there is the function \textit{write()}.\\
 	It takes a file descriptor, the input string and the amount of bytes to be written:\bigskip
 	
@@ -58,7 +58,7 @@ read(myfile, mytext, sizeof mytext - 1);
 	
 \end{frame}
 
-\begin{frame}[fragile]{Close}
+\begin{frame}[fragile = singleslide]{Close}
 	After finishing your file operations, you have to tell your OS that you have do not need the file any more by closing the file descriptor:\\\ \\
 	
 	\begin{lstlisting}
@@ -70,7 +70,7 @@ close(myfile);
 	Note that there is a maximum number of files a process can have opened at a time!
 \end{frame}
 
-\begin{frame}[fragile]{Special file descriptors}
+\begin{frame}[fragile = singleslide]{Special file descriptors}
 	By default, each process has the three file descriptors \textit{0, 1 and 2} referring to the standard input, output and error.\\
 	You could read user input and write output by using the \textit{read()} and \textit{write()} functions along with these files as well:\bigskip
 	\begin{lstlisting}
@@ -88,7 +88,7 @@ write(1, message, strlen(message));
 \section{File pointers}
 \subsection{}
 
-\begin{frame}[fragile]{Returning to standard}
+\begin{frame}[fragile = singleslide]{Returning to standard}
 	The C standard library contains a special datastructure for handling files: a so called \textbf{file pointer} \textit{FILE*}:\\\ \\
 	
 	\begin{lstlisting}
@@ -105,7 +105,7 @@ fclose(myfile);
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Making life easier}
+\begin{frame}[fragile = singleslide]{Making life easier}
 	By browsing \textit{stdio.h}, you will find the following function:
 	\begin{lstlisting}
 int fprintf(FILE *restrict, const char *restrict, ...);

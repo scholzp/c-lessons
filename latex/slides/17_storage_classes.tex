@@ -33,7 +33,7 @@
 	To modify this behaviour, C allows variable declarations with one of the following keywords: \textit{extern}, \textit{static}, \textit{register} and \textit{auto}.
 \end{frame}
 
-\begin{frame}[fragile]{\textit{extern}}
+\begin{frame}[fragile = singleslide]{\textit{extern}}
 	In order to access a variable that has been defined outside the current file, you have to tell the compiler to look for it in another file.\\
 	This is done by prefixing the variable declaration with the keyword \textit{extern}.\\
 	\bigskip
@@ -68,7 +68,7 @@ int parse_line(void) {
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{\textit{register} and \textit{auto}}
+\begin{frame}[fragile = singleslide]{\textit{register} and \textit{auto}}
 	Variables that should be accessed fast can be put in \textit{register}s instead of the memory. However,
 	\begin{itemize}
 		\item They must not be larger than a word in your architecture
@@ -83,7 +83,7 @@ for (register i; i < 4096; ++i);	/* int is default */
 	All variables declared inside functions without any special keyword are \textit{auto}matically put on the stack $-$ no need to explicitely use \textit{auto}.
 \end{frame}
 
-\begin{frame}[fragile]{Storage classes of functions}
+\begin{frame}[fragile = singleslide]{Storage classes of functions}
 	By default, functions are global and available in the whole program.\\
 	\bigskip
 	You could declare them \textit{extern} in every file you want to call them, but it is better practice to include a header containing the function declaration.\\

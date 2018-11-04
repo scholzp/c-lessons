@@ -26,7 +26,7 @@
 
 \section{Memory allocation}
 \subsection{}
-\begin{frame}[fragile]{Runtime conditions}
+\begin{frame}[fragile = singleslide]{Runtime conditions}
 	Think about a helper function that initializes a large portion of memory (e.g. for an array).\\
 	\bigskip
 	Until now, we have let the compiler decide how to place the variables and arrays in memory. In many cases, this is not sufficient.\\
@@ -41,7 +41,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{A closer look at memory}
+\begin{frame}[fragile = singleslide]{A closer look at memory}
 	\begin{tikzpicture}[y=2cm, font=\footnotesize]
 		\node[above, font=\small] at (1.5,0) {Stack};
 		
@@ -159,7 +159,7 @@ int *new_block = malloc(sizeof(int));
 	\only<5>{\textit{malloc()} just needs to know the size of the block it reserves. \\
 		Let us allocate a \textit{long} variable as well.}
 \end{frame}
-\begin{frame}[fragile]{\textit{malloc()} in detail}
+\begin{frame}[fragile = singleslide]{\textit{malloc()} in detail}
 	The function declaration might be a little bit confusing:
 	\begin{lstlisting}[numbers=none]
 void *malloc(size_t size);
@@ -173,7 +173,7 @@ void *malloc(size_t size);
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Casting or not casting\dots}
+\begin{frame}[fragile = singleslide]{Casting or not casting\dots}
 	Some people claim you had to explicitly \textit{cast} the return value of \textit{malloc()}.\\
 	\ \\
 	\only<2->{\textbf{This is outdated.}} \ \\
@@ -200,7 +200,7 @@ int *block = malloc(sizeof *block); /* gold standard */
 	\ \\
 	\only<2->{\large Do not typecast the result of malloc() \& co.}
 \end{frame}
-\begin{frame}[fragile]{Tidying up}
+\begin{frame}[fragile = singleslide]{Tidying up}
 	Unlike normally declared variables, dynamically allocated storage is not automatically released when the function returns.
 	\begin{lstlisting}
 void foo(void) {
@@ -217,7 +217,7 @@ free(void *ptr);
 
 \section{Dynamic arrays}
 \subsection{}
-\begin{frame}[fragile]{Reserving large chunks}
+\begin{frame}[fragile = singleslide]{Reserving large chunks}
 	To get a dynamic array of a certain \textit{type} and \textit{length}, you have to
 	\begin{itemize}
 		\item Pass the block size $length * sizeof(type)$ to \textit{malloc()}
@@ -234,7 +234,7 @@ int *field = malloc(42 * sizeof *field);
 	With the help of pointer arithmetic, you can use the dynamic array like a "normal" one.
 \end{frame}
 
-\begin{frame}[fragile]{The fancy alternative}
+\begin{frame}[fragile = singleslide]{The fancy alternative}
 		\begin{lstlisting}[numbers=none]
 void *calloc(size_t nmemb, size_t size);
 \end{lstlisting}
@@ -256,7 +256,7 @@ int *field = calloc(field_length, sizeof *field);
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Resizing arrays}
+\begin{frame}[fragile = singleslide]{Resizing arrays}
 	Now we come to the point that motivated us to use dynamic arrays:\\
 	\ \\
 	\begin{lstlisting}[numbers=none]
@@ -274,7 +274,7 @@ void *realloc(void *ptr, size_t size);
 		\item If it's greater, the block may be at a different location in the memory $\rightarrow$ \textit{ptr} is freed then, also the additional bytes are not initialized
 	\end{itemize}
 \end{frame}
-\begin{frame}[fragile]{Clean up your code}
+\begin{frame}[fragile = singleslide]{Clean up your code}
 	Passing arrays between functions can be complicated if you store the pointer and the length seperately.\\
 	\ \\
 	Do you remember a way to keep different things together?\\
@@ -290,7 +290,7 @@ struct int_array {
 		This allows you to use the \textit{struct int\_array} as a single argument or return value. Even better: pass a pointer on that structure.
 	\end{uncoverenv}
 \end{frame}
-\begin{frame}[fragile]{Strings from pointers to \textit{char}}
+\begin{frame}[fragile = singleslide]{Strings from pointers to \textit{char}}
 	By handling strings as dynamic \textit{char} arrays you can alter their size which is needed for many operations on them.
 	\begin{itemize}
 		\item \textit{strlen()} returns the actual length of a string (up to '\textbackslash 0' character)

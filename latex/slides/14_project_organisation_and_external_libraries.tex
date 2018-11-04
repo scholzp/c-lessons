@@ -36,7 +36,7 @@
 	We now will organize the project in multiple files.
 \end{frame}
 
-\begin{frame}[fragile]{Header files}
+\begin{frame}[fragile = singleslide]{Header files}
 	The first thing we do is to seperate the I/O part into a file called \textit{io.c}:\\
 	\begin{itemize}
 		\item \textit{handle\_input, draw\_board, print\_entity}
@@ -67,7 +67,7 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Global variables}
+\begin{frame}[fragile = singleslide]{Global variables}
 	Since the source files all are accessing the global variables, we move them into another header file \textit{globals.h}.\\\ \\
 	Finally we outsource the function \textit{out\_of\_bounds} and the global variable \textit{next\_coords} into \textit{board.c}.\\
 	\begin{itemize}
@@ -84,7 +84,7 @@
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Where to put these files?}
+\begin{frame}[fragile = singleslide]{Where to put these files?}
 Now we have a mess of \textbf{.h} and \textbf{.c} files hanging around in a single directory.\\
 Best practice is to:
 \begin{itemize}
@@ -111,7 +111,7 @@ $ gcc src/foo.c -I./include
 
 \section{Make}
 \subsection{}
-\begin{frame}[fragile]{Compiling}
+\begin{frame}[fragile = singleslide]{Compiling}
 	To compile a project from multiple files you have to pass all source files to gcc:\\\ \\
 	\begin{lstlisting}[numbers=none]
 $ gcc -Wall -o main datastructures.c io.c board.c main.c
@@ -122,7 +122,7 @@ $ gcc -Wall -o main datastructures.c io.c board.c main.c
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Makefiles}
+\begin{frame}[fragile = singleslide]{Makefiles}
 	There is a package called \textit{make} that allows you to write the compile order into a file and start compiling with a more simple command:\\\ \\
 	\begin{lstlisting}[numbers=none]
 $ make
@@ -133,7 +133,7 @@ $ make
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Make rulez!}
+\begin{frame}[fragile = singleslide]{Make rulez!}
 	You can define rules in your makefile:
 	\begin{lstlisting}[language=make,basicstyle=\scriptsize,numbers=none]
 all:
@@ -173,7 +173,7 @@ $ make debug
 	We would like to split the compilation process and keep the unlinked *.o files to link newly build *.o files with existing ones.
 \end{frame}
 
-\begin{frame}[fragile]{Dependencies}
+\begin{frame}[fragile = singleslide]{Dependencies}
 	gcc compiles without linking when the \textit{-c} flag is set.\\
 	You can add a dependency to your makefile by writing it behind the rule identifier. Dependencies on other rules are allowed:\\\ \\
 	\begin{lstlisting}[language=make,basicstyle=\scriptsize,numbers=none]
@@ -191,7 +191,7 @@ secondfile.o: secondfile.c secondfile.h
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{A few tutorials later}
+\begin{frame}[fragile = singleslide]{A few tutorials later}
 	\begin{columns}
 	\column{.5\textwidth}
 	\begin{lstlisting}[language=make,basicstyle=\tiny,escapeinside=§]
@@ -256,7 +256,7 @@ $(OBJDIR):
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{CMake}
+\begin{frame}[fragile = singleslide]{CMake}
 	CMake stands for cross-platform make and offers a more high-level, declarative approach to building.
 
 	CMake does not build projects itself, instead it generates the necessary project files for other tools such as Make, Visual Studio or XCode.

@@ -34,7 +34,7 @@
 
 \section{Loops}
 \subsection{}
-\begin{frame}[fragile]{Loops}
+\begin{frame}[fragile = singleslide]{Loops}
 	To repeat statements as long as a certain condition is met, C offers 3 different loops.
 	\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
 while (condition)
@@ -51,7 +51,7 @@ for (initialization; condition; statement)
 \end{lstlisting}
 	For multiple statements again, use braces.
 \end{frame}
-\begin{frame}[fragile]{while}
+\begin{frame}[fragile = singleslide]{while}
 	The execution of a loop is a continuous alternation between checking if the condition is still met and executing the statement(s).
 	\begin{lstlisting}
 int i = 2;
@@ -69,7 +69,7 @@ printf("done\n");
 	\end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{do...while}
+\begin{frame}[fragile = singleslide]{do...while}
 	The difference between \textit{do...while} and \textit{while} is the order of executing the statement(s) and checking the condition.\\
 	\bigskip
 	The \textit{while} loop begins with checking, while the \textit{do...while} loop begins with executing the statement(s).
@@ -82,7 +82,7 @@ while (i < 1);
 	\bigskip
 	The Statement(s) in a \textit{do ... while} loop are executed at least once.
 \end{frame}
-\begin{frame}[fragile]{for}
+\begin{frame}[fragile = singleslide]{for}
 	The For-Loop is comfortable for iterating. It takes three arguments.
 	\begin{itemize}
 		\item Initialization
@@ -104,7 +104,7 @@ for (i = 1; i <= 10; ++i)
 
 \section{Miscellaneous}
 \subsection{}
-\begin{frame}[fragile]{Meanwhile...}
+\begin{frame}[fragile = singleslide]{Meanwhile...}
 	Be careful, this
 	\begin{lstlisting}[numbers=none]
 while (1 > 0)
@@ -115,7 +115,7 @@ runs till the end of all days.\\
 Check for conditions that are always true.
 \end{frame}
 
-\begin{frame}[fragile]{for ever}
+\begin{frame}[fragile = singleslide]{for ever}
 	The arguments for the \textit{for loop} are optional. E.g. if you already have defined your iterating variable:
 	\begin{lstlisting}[numbers=none]
 int i = 1;
@@ -152,7 +152,7 @@ Note: the semicolons are still there.
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Saving code lines}
+\begin{frame}[fragile = singleslide]{Saving code lines}
 	You can define variables inside the initialization part of a for loop.
 	\begin{lstlisting}[numbers=none]
 for (int i = 1; i <= 10; ++i)
@@ -169,7 +169,7 @@ printf("Tries: %d\n", i);	/* invalid! */
 	This feature was added in the C99 standard.
 \end{frame}
 
-\begin{frame}[fragile]{Compiler options}
+\begin{frame}[fragile = singleslide]{Compiler options}
 	When calling \textit{gcc}, you can pass several options to it:\\
 	\bigskip
 	\begin{tabular}{|l|l|}
@@ -188,7 +188,7 @@ $ gcc -std=c99 -o main main.c
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{A few words on style}
+\begin{frame}[fragile = singleslide]{A few words on style}
 	\begin{itemize}
         \item Stay consistent after deciding whether to use or not to use braces on a single statement
 		\item If you skip the loop body

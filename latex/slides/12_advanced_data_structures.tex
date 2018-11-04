@@ -24,7 +24,7 @@
 
 \section{Lists and binary trees}
 \subsection{}
-\begin{frame}[fragile]{Yay, pointers}
+\begin{frame}[fragile = singleslide]{Yay, pointers}
 	For better handling of datastructures, we define \textit{structs} with additional pointers to themselves:\\\ \\
 	\begin{columns}[c]
 		\column{.5\textwidth}
@@ -764,7 +764,7 @@ struct listElement {
 \section{Pointers to functions}
 \subsection{}
 
-\begin{frame}[fragile]{Higher order functions}
+\begin{frame}[fragile = singleslide]{Higher order functions}
 	It is possible to pass a function as an argument of another function.\\
 	Doing so, you get a function that can call different other functions.\\
 	\bigskip
@@ -781,7 +781,7 @@ int (*print)(const char *) = puts;	/* From stdlib */
 	Note that the $\&$ operator can be omitted.
 \end{frame}
 
-\begin{frame}[fragile]{Example}
+\begin{frame}[fragile = singleslide]{Example}
 	\begin{lstlisting}
 #include <stdio.h>
 

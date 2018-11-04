@@ -111,7 +111,7 @@
 \section{Socket Programming}
 \subsection{}
 
-\begin{frame}[fragile]{Sockets}
+\begin{frame}[fragile = singleslide]{Sockets}
     Sockets are abstractions for connection endpoints to be used by processes.
     Both the server and the client process have a socket which they use to
     send data to each other.\\
@@ -132,7 +132,7 @@
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{\texttt{socket()}}
+\begin{frame}[fragile = singleslide]{\texttt{socket()}}
 	Create an endpoint for communication.
 	\begin{lstlisting}[numbers=none,morekeywords={*,SOCKET,socklen_t,sockaddr}]
 //Unix
@@ -155,7 +155,7 @@ SOCKET socket(int domain, int type, int protocol);
 
 
 % - close[socket]()
-\begin{frame}[fragile]{\texttt{close[socket]()}}
+\begin{frame}[fragile = singleslide]{\texttt{close[socket]()}}
 Close an existing socket / file descriptor.
 	\begin{lstlisting}[numbers=none,morekeywords={*,SOCKET,socklen_t,sockaddr}]
 //Unix
@@ -171,7 +171,7 @@ int closesocket(SOCKET socket);
 	Do not leak file descriptors!
 \end{frame}
 
-\begin{frame}[fragile]{\texttt{connect()}}
+\begin{frame}[fragile = singleslide]{\texttt{connect()}}
     Connect a socket to another via the network.
     \begin{lstlisting}[numbers=none,morekeywords={*,SOCKET,socklen_t,sockaddr}]
 // Unix
@@ -192,7 +192,7 @@ int connect(SOCKET socket, const struct sockaddr *address,
     optional.
 \end{frame}
 
-\begin{frame}[fragile]{\texttt{bind()}}
+\begin{frame}[fragile = singleslide]{\texttt{bind()}}
     Bind an address to a socket.
     \begin{lstlisting}[numbers=none,morekeywords={*,SOCKET,socklen_t,sockaddr}]
 // Unix
@@ -212,7 +212,7 @@ int bind(SOCKET socket, const struct sockaddr *address,
     Naming a socket is necessary for connections from the outside!
 \end{frame}
 
-\begin{frame}[fragile]{\texttt{listen()}}
+\begin{frame}[fragile = singleslide]{\texttt{listen()}}
     Enable listening for connections to a specific socket.
     \begin{lstlisting}[numbers=none,morekeywords={*,SOCKET}]
 // Unix
@@ -231,7 +231,7 @@ int listen(SOCKET socket, int backlog);
     connections on a server.
 \end{frame}
 
-\begin{frame}[fragile]{\texttt{accept()}}
+\begin{frame}[fragile = singleslide]{\texttt{accept()}}
     Accept a new connection on a socket.
     \begin{lstlisting}[numbers=none,morekeywords={*,SOCKET,sockaddr,socklen_t}]
 // Unix
@@ -254,7 +254,7 @@ SOCKET accept(SOCKET socket, struct sockaddr *address,
 \end{frame}
 
 % - send()
-\begin{frame}[fragile]{\texttt{send[to]()}}
+\begin{frame}[fragile = singleslide]{\texttt{send[to]()}}
     Send a message on a socket.
     \begin{lstlisting}[numbers=none,morekeywords={*,SOCKET,sockaddr,socklen_t,size_t}]
 // Unix
@@ -278,7 +278,7 @@ int send[to](SOCKET socket, const char *buffer, int lenght,
 \end{frame}
 
 % recv()
-\begin{frame}[fragile]{\texttt{recv[from]()}}
+\begin{frame}[fragile = singleslide]{\texttt{recv[from]()}}
     Recieve a message on a socket.
     \begin{lstlisting}[numbers=none,basicstyle=\scriptsize,morekeywords={*,SOCKET,sockaddr,socklen_t}]
 // Unix

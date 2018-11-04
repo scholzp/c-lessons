@@ -32,7 +32,7 @@
 \section{Using functions}
 \subsection{}
 
-\begin{frame}[fragile]{\only<1>{Remember the main \textit{function}?}%
+\begin{frame}[fragile = singleslide]{\only<1>{Remember the main \textit{function}?}%
                        \only<2->{Defining functions}}
 	\begin{columns}[T]
 		\column{.33\textwidth}<3->
@@ -86,7 +86,7 @@ int main(void) {
 	\end{textblock}
 \end{frame}
 
-\begin{frame}[fragile]{Passing arguments}
+\begin{frame}[fragile = singleslide]{Passing arguments}
 	\begin{itemize}
 		\item Each value is assigned to the parameter at the same position in the argument list (and therefore must have the same type)
 	\end{itemize}		
@@ -113,7 +113,7 @@ int main(void) {
 
 \section{More on scopes}
 \subsection{}
-\begin{frame}[fragile]{Global variables}
+\begin{frame}[fragile = singleslide]{Global variables}
 	\begin{itemize}
 		\item Variables defined outside any function
 		\item Scope: from line of declaration to end of program
@@ -133,7 +133,7 @@ int main(void) {
 \end{lstlisting}
 	Altering them in one function may have \textbf{side effects} on other functions $\rightarrow$ use them rarely.
 \end{frame}
-\begin{frame}[fragile]{Where not to call functions}
+\begin{frame}[fragile = singleslide]{Where not to call functions}
 	Since a function's scope starts at the line of its definition, having two functions \textit{f()} and \textit{g()} calling each other is not possible:
 	\begin{lstlisting}
 void f(int i) {
@@ -148,7 +148,7 @@ void g(int i) {
 \end{lstlisting}
 	In that case, \textit{g()} is called outside its scope. Changing the order does not work either.
 \end{frame}
-\begin{frame}[fragile]{Prototypes}
+\begin{frame}[fragile = singleslide]{Prototypes}
 	Like variables, functions can also be \textit{declared}:
 	\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
 return_type identifier(argument list);
@@ -169,7 +169,7 @@ void f(int i) {
 void g(int i) {...}	/* g() definition, similar to f() */
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Better program structure}
+\begin{frame}[fragile = singleslide]{Better program structure}
 	To avoid problems like that above, it is a common practise to \textit{declare} all functions at the top of the file and define them below the main function:
 	\begin{lstlisting}
 void f(int i);
@@ -188,7 +188,7 @@ void f(int i) {
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Good documentation style}
+\begin{frame}[fragile = singleslide]{Good documentation style}
     Add a documentation comment to each function prototype:
     \begin{lstlisting}
 /*
@@ -217,7 +217,7 @@ int add(int num1, int num2);
 \end{frame}
 \section{Recursion}
 \subsection{}
-\begin{frame}[fragile]{Recursive functions}
+\begin{frame}[fragile = singleslide]{Recursive functions}
 	\begin{itemize}
 		\item Functions calling themselves
 		\item Used to implement many mathematical algorithms
@@ -232,7 +232,7 @@ void foo(void) {
 	creates an infinite loop.\footnote{And, at some point, a program crash (\textit{stack overflow})} \\
 	There must always be an \textit{exit condition} if using recursion!
 \end{frame}
-\begin{frame}[fragile]{Exponentiation}
+\begin{frame}[fragile = singleslide]{Exponentiation}
 As an example, take a look at this function calculating $base^{exponent}$:
 	\begin{lstlisting}
 int power(int base, int exponent) {

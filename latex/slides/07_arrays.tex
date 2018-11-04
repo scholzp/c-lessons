@@ -149,7 +149,7 @@
 	\uncover<5->{C offers an opportunity to access variables through an index: arrays}
 \end{frame}
 
-\begin{frame}[fragile]{Definition}
+\begin{frame}[fragile = singleslide]{Definition}
 	To only declare an array, you have to specify the size.
 	\begin{lstlisting}[numbers=none, basicstyle=\itshape\small]
 type identifier[size];
@@ -168,7 +168,7 @@ leet[3] = 7;
 \end{lstlisting}
 	\textbf{Note:} The first index is 0, the last one is \textit{size} - 1
 \end{frame}
-\begin{frame}[fragile]{Partial initialization}
+\begin{frame}[fragile = singleslide]{Partial initialization}
 	If you declare an array, memory gets reserved. This memory is full of trash data. Before you initialize the array, you can not determine what is in.\\
 	\ \\
 	You can initialize an array partially. If you do so, the rest gets initialized with 0.
@@ -180,7 +180,7 @@ int arr[5] = {1, 3};	/* initializes {1, 3, 0, 0, 0} */
 char clear[255] = {0};
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Access}
+\begin{frame}[fragile = singleslide]{Access}
 	You access an array element, like defining it, through its index.
 	\begin{lstlisting}[numbers=none]
 int leet[] = {1, 3, 3, 7};
@@ -198,7 +198,7 @@ int leet[] = {1, 3, 3, 7};
 int whatIf = leet[4];	/* feel free to try out */
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Looping through arrays}
+\begin{frame}[fragile = singleslide]{Looping through arrays}
 	The fact, that you can use a statement as index allows us to easily loop through an array.
 	\begin{lstlisting}[numbers=none]
 int leet[] = {1, 3, 3, 7};
@@ -210,7 +210,7 @@ for(int i = 0; i < §4§; ++i)
 \end{frame}
 \section{sizeof}
 \subsection{}
-\begin{frame}[fragile]{Remember, Remember}
+\begin{frame}[fragile = singleslide]{Remember, Remember}
 	Old and busted:
 	\begin{itemize}
 		\item The size of types may differ on different architectures
@@ -230,7 +230,7 @@ int sizeOfInt = sizeof(int); /* depending on architecture */
 	when passing identifiers.
 \end{frame}
 
-\begin{frame}[fragile]{Sizeof an array}
+\begin{frame}[fragile = singleslide]{Sizeof an array}
 	What if?
 	\begin{lstlisting}[numbers=none]
 int leet[] = {1, 3, 3, 7};
@@ -259,7 +259,7 @@ for(int i = 0; i < (sizeof range / sizeof range[0]); ++i) {
 
 \section{Strings n' more}
 \subsection{}
-\begin{frame}[fragile]{Oh, hello again}
+\begin{frame}[fragile = singleslide]{Oh, hello again}
 	In C, strings are handled as zero terminated Character arrays.\\
 	In memory, the string "Hello World!" would look as follows:\\
 	\begin{tikzpicture}[font=\scriptsize,x=1.4cm]
@@ -310,7 +310,7 @@ char hello[] = "Hello World!";
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Printing strings}
+\begin{frame}[fragile = singleslide]{Printing strings}
 	You can print strings with printf with the placeholder \textit{\%s}.\\
 	It expects an array of chars as an argument:\bigskip
 	\begin{lstlisting}[numbers=none]
@@ -325,7 +325,7 @@ puts(hello);
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{String input}
+\begin{frame}[fragile = singleslide]{String input}
 	You \textbf{could} use \textit{scanf()} for string input, but it is kind of a mess. You better use \textit{fgets}:
 	\begin{lstlisting}[numbers=none]
 char input[42];
@@ -337,7 +337,7 @@ fgets(input, sizeof input, stdin);
 		\item \textit{stdin} is the standard input
 	\end{itemize}
 \end{frame}
-\begin{frame}[fragile]{Passing arrays}
+\begin{frame}[fragile = singleslide]{Passing arrays}
 	An array is passed by its identifier, no big deal. The real question is, how a function is defined, that takes an array as argument.
 	\begin{lstlisting}[numbers=none]
 int foo(char arr[]) {
@@ -351,7 +351,7 @@ int foo(char arr[]) {
 	\end{itemize}
 \end{frame}
 %
-\begin{frame}[fragile]{Arrays of arrays}
+\begin{frame}[fragile = singleslide]{Arrays of arrays}
 	\begin{itemize}
 		\item Every sub-array is of the same type
 		\item All dimensions apart from the first \underline{must} be specified
@@ -374,7 +374,7 @@ char arr[][4] = {{'f', 'o', 'o', '\0'},
 	\end{itemize}
 \end{frame}
 %
-\begin{frame}[fragile]{Passing arrays of arrays}
+\begin{frame}[fragile = singleslide]{Passing arrays of arrays}
 	\begin{itemize}
 		\item You can also pass arrays of arrays to functions
 		\item Once again, we need to specify the dimensions

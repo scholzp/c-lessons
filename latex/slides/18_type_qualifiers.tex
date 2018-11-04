@@ -22,7 +22,7 @@
 \section{Type qualifiers}
 \subsection{}
 
-\begin{frame}[fragile]{Extended expressiveness}
+\begin{frame}[fragile = singleslide]{Extended expressiveness}
 To give more information about a variable to the compiler, you can\\
 \textit{qualify} its type. There are three type qualifiers in C:\\
 \begin{itemize}
@@ -43,7 +43,7 @@ int const * const foo; 			  /* everything constant */
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{\textit{const}}
+\begin{frame}[fragile = singleslide]{\textit{const}}
 To prevent all write accesses to a variable, declare its type \textit{const}.\\
 \begin{lstlisting}
 void f(int *a);
@@ -64,7 +64,7 @@ const int boardWidth; /* depends on runtime input */
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{\textit{volatile}}
+\begin{frame}[fragile = singleslide]{\textit{volatile}}
 If a variable's value may change between two accesses, we have to\\
 prevent the compiler from optimising away subsequent reads or writes.\\
 \bigskip
@@ -97,7 +97,7 @@ int main(void) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{\textit{volatile} ctd.}
+\begin{frame}[fragile = singleslide]{\textit{volatile} ctd.}
 After compilation with \textit{-O3}:
 \begin{columns}
 \column{.5\textwidth}
@@ -134,7 +134,7 @@ main():
 The compiler could not precompute \textit{i} and pass 42 to \textit{printf} directly.
 \end{frame}
 
-\begin{frame}[fragile]{\textit{restrict}}
+\begin{frame}[fragile = singleslide]{\textit{restrict}}
 If a pointer is \textit{restrict}, the compiler assumes that it is the only reference\\
 to the targeted memory (no aliases). This enables further optimisation.\\
 \bigskip

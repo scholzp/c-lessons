@@ -41,7 +41,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Data records}
+\begin{frame}[fragile = singleslide]{Data records}
 	Composite data types are derived from primitive data types. You can store any number of primitive variables in one composite variable.
 	\begin{itemize}
 		\item The composite variable is called \textit{structure} and has the type \textit{struct}
@@ -57,7 +57,7 @@ struct person {		/* struct <identifier> */
 \end{lstlisting}
 	A \textit{struct} variable is at least as large as all of its members.
 \end{frame}
-\begin{frame}[fragile]{\textit{struct} variables}
+\begin{frame}[fragile = singleslide]{\textit{struct} variables}
 	Our new type \textit{struct person} can be used to declare variables any where in its scope:
 	\begin{lstlisting}[numbers=none]
 struct person pers_alice, pers_bob;
@@ -70,7 +70,7 @@ struct person {
 \end{lstlisting}
 	If we do not need the struct type \textit{person} for further variable declarations, its identifier can be left out.
 \end{frame}
-\begin{frame}[fragile]{Definition and member access}
+\begin{frame}[fragile = singleslide]{Definition and member access}
 	To initialize the \textit{struct} members upon declaration, enclose the values in braces as we did it for arrays:
 	\begin{lstlisting}[numbers=none]
 struct person pers_alice = { 1, 20, "Alice" };
@@ -81,7 +81,7 @@ printf("%d\n", pers_alice.id);
 pers_alice.age++;
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{\textit{struct}s as \textit{struct} members}
+\begin{frame}[fragile = singleslide]{\textit{struct}s as \textit{struct} members}
 	An address is rather complicated:
 	\begin{lstlisting}[numbers=none]
 struct address {
@@ -101,7 +101,7 @@ struct person {
 pers_alice.contact.postcode = 15430;
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{\textit{union}s}
+\begin{frame}[fragile = singleslide]{\textit{union}s}
 	\begin{itemize}
 		\item Similar to \textit{struct}s, handle them in the same way
 		\item However: only one member can be "active"
@@ -121,7 +121,7 @@ union compound {
 \end{frame}
 \section{Enumerations}
 \subsection{}
-\begin{frame}[fragile]{Smart aliases}
+\begin{frame}[fragile = singleslide]{Smart aliases}
 	An enumeration consists of identifiers that behave like \textit{constant values}. \\
 	It is declared using the keyword \textit{enum}:
 	\begin{lstlisting}[numbers=none]
@@ -137,7 +137,7 @@ enum light {
 		\item No invalid values (like \textit{-1}) can be assigned
 	\end{itemize}
 \end{frame}
-\begin{frame}[fragile]{Profit}
+\begin{frame}[fragile = singleslide]{Profit}
 	You can determine the values of the constants on your own:
 	\begin{lstlisting}[numbers=none]
 enum workday {
@@ -167,7 +167,7 @@ char tetris_board[WIDTH][HEIGHT];
 	$\rightarrow$ Have a global type definition, declare the variables in the local context \\ \ \\
 	Name \textit{enum} constants in CAPITAL letters to visually seperate them from variables.
 \end{frame}
-\begin{frame}[fragile]{\textbf{typedef}}
+\begin{frame}[fragile = singleslide]{\textbf{typedef}}
 	Sometimes you see people writing code like that:
 	\begin{lstlisting}[numbers=none]
 typedef struct foo {

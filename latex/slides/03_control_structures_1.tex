@@ -34,7 +34,7 @@
 
 \section{Arithmetic operators}
 \subsection{}
-\begin{frame}[fragile]{Let's calc}
+\begin{frame}[fragile = singleslide]{Let's calc}
 	Each expression (variables or values) you type in gets evaluated.\\
 	You can use operators to combine existing expressions to new ones.
 \ \\
@@ -51,7 +51,7 @@ char c = 120;	/* 120 */
 char d = 2 * c;	/* why is that not 240? */
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{You see, it's not that easy}
+\begin{frame}[fragile = singleslide]{You see, it's not that easy}
 	\begin{itemize}
 		\item Variables may overflow
 		\item You shall not divide by zero
@@ -73,7 +73,7 @@ i1 + s;		/* int and short, result is int */
 i1 / f;		/* result is float, actual division */
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Syntactic sugar}
+\begin{frame}[fragile = singleslide]{Syntactic sugar}
 	As you have seen, you can use any expression on the right side of the assignment operator.\\
 	This expression often contains the variable it is assigned to.\\\ \\
 	To avoid redundancy, C offers the following short forms:\\
@@ -104,7 +104,7 @@ c--;		/* c = c - 1; */
 		\item != for "not equal to"
 	\end{itemize}
 \end{frame}
-\begin{frame}[fragile]{Do not get confused}
+\begin{frame}[fragile = singleslide]{Do not get confused}
 	Imagine the following
 	\begin{lstlisting}[numbers=none]
 (5 < 7) =@\,@= 1;	/* evaluated to 1 */
@@ -115,7 +115,7 @@ c--;		/* c = c - 1; */
 	\item<3-> 1 == 1 is \textbf{true} $\rightarrow$ \textbf{1}
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile]{A sign meant...}
+\begin{frame}[fragile = singleslide]{A sign meant...}
 	Assignments are expressions that get evaluated and have a truth value, too.
 	Consider:
 		\begin{lstlisting}[numbers=none]
@@ -147,7 +147,7 @@ int b = ++c;	/* evaluates to c + 1, b is 44, c is 44 */
 	! \ $>$ \ \&\& \ $>$ \ $||$ 
 \end{frame}
 
-\begin{frame}[fragile]{Seems logical}
+\begin{frame}[fragile = singleslide]{Seems logical}
 	Caution: a condition will only be evaluated until its result is definitive.
 	\begin{itemize}
 	\item $a$ \&\& $b$: $b$ will only be evaluated if $a$ is true.
@@ -176,7 +176,7 @@ if ((b != 0) && (a % b =@\,@= 0)) {
 
 \section{Conditions}
 \subsection{}
-\begin{frame}[fragile]{if...else}
+\begin{frame}[fragile = singleslide]{if...else}
 	To make decisions during run time, you can use the truth value of an expression:
 	\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
 if (condition)
@@ -193,7 +193,7 @@ if (condition) {
 }
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{else if}
+\begin{frame}[fragile = singleslide]{else if}
 	To differentiate between more than two cases, you can use the if condition as a statement in the else body:\\\ \\
 	\begin{columns}[c]
 		\column{0.5\textwidth}
@@ -229,7 +229,7 @@ else
 	\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{switch}
+\begin{frame}[fragile = singleslide]{switch}
 	If you have to check one variable for many constant values, \textit{switch case} is your friend:
 	\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
 switch (variable) {
@@ -249,7 +249,7 @@ switch (variable) {
 \section{Remarks}
 \subsection{}
 
-\begin{frame}[fragile]{Scopes}
+\begin{frame}[fragile = singleslide]{Scopes}
 	You begin a block with a '\{' and end it with a '\}':
 	\begin{lstlisting}
 int i = 4;
@@ -267,7 +267,7 @@ j = 2;			/* invalid, j is not in scope */
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Shadowing identifiers}
+\begin{frame}[fragile = singleslide]{Shadowing identifiers}
 	When redeclaring identifiers inside a block, they refer to a new variable:
 	\begin{lstlisting}
 int i = 3;		/* Defining i with value 3 */
@@ -286,7 +286,7 @@ int i = 3;		/* Defining i with value 3 */
 \end{frame}
 
 
-\begin{frame}[fragile]{A few words on style}
+\begin{frame}[fragile = singleslide]{A few words on style}
 
 	\begin{itemize}
 		\item Typing \textbf{if (cond)} instead of \textbf{if(cond)} helps people to differentiate between control structures and function calls faster
@@ -305,7 +305,7 @@ if (cond)
 	statement;			/* looks way clearer */
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{More words on style}
+\begin{frame}[fragile = singleslide]{More words on style}
 	\begin{itemize}
 		\item if you use a block anywhere in an \textbf{if ... else} structure, put all blocks of this structure in braces
 	\end{itemize}

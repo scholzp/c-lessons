@@ -38,7 +38,7 @@
     All threads of a process share the same memory.
 \end{frame}
 
-\begin{frame}[fragile]{Use the fork}
+\begin{frame}[fragile = singleslide]{Use the fork}
     \begin{lstlisting}
 #include <unistd.h>
 
@@ -61,7 +61,7 @@ int main(void) {
 
 \section{pthreads}
 \subsection{}
-\begin{frame}[fragile]{pthread\_create}
+\begin{frame}[fragile = singleslide]{pthread\_create}
     To execute a function in a new thread, use:
     \begin{lstlisting}[numbers=none]
 int pthread_create(pthread_t *thread,
@@ -78,7 +78,7 @@ int pthread_create(pthread_t *thread,
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Hello threads}
+\begin{frame}[fragile = singleslide]{Hello threads}
     \begin{lstlisting}
 #include <pthread.h>
 #include <stdio.h>
@@ -100,7 +100,7 @@ int main(void) {
 
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{How threads end:}
+\begin{frame}[fragile = singleslide]{How threads end:}
     \begin{itemize}
         \item \textit{start\_routine} returns
         \item \textit{pthread\_exit} is called
@@ -115,7 +115,7 @@ int pthread_cancel(pthread_t thread);
         \item \textit{main} finishes before \textit{start\_routine} (ending the process)
     \end{itemize}
 \end{frame}
-\begin{frame}[fragile]{Waiting for threads}
+\begin{frame}[fragile = singleslide]{Waiting for threads}
     To wait for a thread to finish, there is \textit{pthread\_join}
     \begin{lstlisting}[numbers=none]
 int pthread_join(pthread_t thread, void **retval);
@@ -138,7 +138,7 @@ int pthread_attr_getdetachstate(const pthread_attr_t *attr,
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{bigger, better, joinable}
+\begin{frame}[fragile = singleslide]{bigger, better, joinable}
     \begin{lstlisting}[basicstyle=\scriptsize]
 int main(void) {
     pthread_t threads[5];
@@ -168,7 +168,7 @@ int main(void) {
 
 \section{Synchronisation}
 \subsection{}
-\begin{frame}[fragile]{Mutexes}
+\begin{frame}[fragile = singleslide]{Mutexes}
     Threads can communicate with each other by manipulating global variables or the value behind the \textit{arg} pointer we pass to \textit{pthread\_create}.\\
     To avoid race conditions, the pthread library provides mutexes.
     \begin{lstlisting}[numbers=none]
@@ -186,7 +186,7 @@ int pthread_mutex_unlock(pthread_mutex_t *mutex);
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Lock me if you can}
+\begin{frame}[fragile = singleslide]{Lock me if you can}
     \begin{lstlisting}[basicstyle=\tiny]
 struct stuff {
     unsigned a;
@@ -222,7 +222,7 @@ void *thread_stuff(void *tid) {
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Deadlocks incoming}
+\begin{frame}[fragile = singleslide]{Deadlocks incoming}
      \begin{lstlisting}[basicstyle=\scriptsize]
 void *thread_1(void *tid) {
     pthread_mutex_lock(mutex_1);

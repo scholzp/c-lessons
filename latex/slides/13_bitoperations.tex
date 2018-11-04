@@ -40,7 +40,7 @@
 	
 \end{frame}
 
-\begin{frame}[fragile]{Computational arithmetics}
+\begin{frame}[fragile = singleslide]{Computational arithmetics}
 	With bit operations, some mathematical tasks can be solved more efficiently:
 	\begin{itemize}
 		\item Multiplying/dividing by $2^n$ is equivalent to a shift by $n$ bits
@@ -56,7 +56,7 @@
 	\end{itemize}\bigskip
 	Be aware of the fact that the readability of your code will suffer from that. Most of these optimisations are done by the compiler anyway.
 \end{frame}
-\begin{frame}[fragile]{Masking}
+\begin{frame}[fragile = singleslide]{Masking}
 	$x\ |\ mask$ sets all bits in $x$ that are $1$ in $mask$.\\
 	\begin{lstlisting}
 'A' | 32;	/* Let a capital letter be small */
@@ -71,7 +71,7 @@
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Bit fields}
+\begin{frame}[fragile = singleslide]{Bit fields}
 	Although it may seem efficient to use each bit of a number to store information in it, it will become nasty to access all the values by:\\
 	$x\ \&\ 1$, $x\ \&\ 2$, $x\ \&\ 4$, \dots all the way up to $2^{sizeof\ int - 1}$\\
 	\bigskip

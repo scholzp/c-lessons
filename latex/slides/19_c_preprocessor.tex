@@ -40,7 +40,7 @@
 	Note that it is not a part of the C language and has developed independently of it.
 \end{frame}
 
-\begin{frame}[fragile]{How it's done}
+\begin{frame}[fragile = singleslide]{How it's done}
 	Every C compiler has a preprocesser facility that processes a source file\\
 	in four phases:\\
 	\begin{enumerate}
@@ -62,7 +62,7 @@ $ gcc -E <source_file>
 \section{Preprocessor directives}
 \subsection{}
 
-\begin{frame}[fragile]{Inclusion of other files}
+\begin{frame}[fragile = singleslide]{Inclusion of other files}
 	The well-known \textit{\#include} directive tells the preprocessor to insert
 	another file in the current source file.\\
 	\bigskip
@@ -82,7 +82,7 @@ $ gcc src/main.c -I./include
 	is the usual convention in C.
 \end{frame}
 
-\begin{frame}[fragile]{Macros without parameters}
+\begin{frame}[fragile = singleslide]{Macros without parameters}
 	The \textit{\#define} directive is used to replace a token with any text.
 	\begin{lstlisting}[numbers=none]
 #define M_PI 3.14159265358979323846	/* found in math.h */
@@ -103,7 +103,7 @@ $ gcc src/main.c -I./include
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Macros with parameters}
+\begin{frame}[fragile = singleslide]{Macros with parameters}
 	Macros can take any number of arguments, as if they were functions.
 	\begin{lstlisting}[numbers=none]
 #define DEGREES(angle_rad) (angle_rad * 180 / M_PI)
@@ -122,7 +122,7 @@ $ gcc src/main.c -I./include
 	of macros, but the GNU C preprocessor (\textit{cpp}) allows it.
 \end{frame}
 
-\begin{frame}[fragile]{Operators in directives}
+\begin{frame}[fragile = singleslide]{Operators in directives}
 	Token stringification (\textit{\#}) converts tokens to C strings.
 	\begin{lstlisting}[numbers=none]
 #define STR(str) #str
@@ -141,7 +141,7 @@ int num = CONCAT(12, 34);	/* becomes 1234 */
 	an example use case are X-Macros.
 \end{frame}
 
-\begin{frame}[fragile]{Conclusion on macros}
+\begin{frame}[fragile = singleslide]{Conclusion on macros}
 	To remove a macro, simply \textit{\#undef} it. Macros also can be re-\textit{\#defined}.\\
 	\bigskip
 	Macros have a huge amount of pitfalls:
@@ -159,7 +159,7 @@ int num = CONCAT(12, 34);	/* becomes 1234 */
 	interface (e.g., the Lua API).
 \end{frame}
 
-\begin{frame}[fragile]{Conditional compilation}
+\begin{frame}[fragile = singleslide]{Conditional compilation}
 	The preprocessor knows the conditional \textit{\#if}, \textit{\#elif}, \textit{\#else}
 	and \textit{\#endif} with the usual semantics. They take expressions which can contain:
 	\begin{itemize}
@@ -178,7 +178,7 @@ const char *this_code = "doesn't matter";
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Conditional compilation ctd.}
+\begin{frame}[fragile = singleslide]{Conditional compilation ctd.}
 	The special operator \textit{\#defined} takes a macro and evaluates to 1, if the macro
 	is currently defined. It has the shortcuts \textit{\#ifdef} and \textit{\#ifndef}.\\
 	\bigskip

@@ -38,7 +38,7 @@
 \section{Do not reinvent the wheel}
 \subsection{}
 
-\begin{frame}[fragile]{The Hitchhiker's Guide to the standard library}
+\begin{frame}[fragile = singleslide]{The Hitchhiker's Guide to the standard library}
 	Many of the problems you will be working on have already been solved.\\
 	\bigskip
 	These solution are provided in \textit{libraries}. Prefer them over your own code!\\
@@ -63,7 +63,7 @@
 
 \section{Useful headers}
 \subsection{}
-\begin{frame}[fragile]{assert.h}
+\begin{frame}[fragile = singleslide]{assert.h}
 	 \begin{itemize}
 	 	\item Contains the \textit{assert()} macro, witch evaluates the truth value of an expression
 	 	\item If it is true, nothing happens
@@ -78,7 +78,7 @@ scanf("%d", &input);
 assert(input < 10);
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{math.h}
+\begin{frame}[fragile = singleslide]{math.h}
 	\begin{itemize}
 		\item Declares a lot of mathematical functions
 		\item Finally you are able to calculate square roots, logarithms, etc.
@@ -89,7 +89,7 @@ assert(input < 10);
 gcc main.c -lm
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{stdio.h}
+\begin{frame}[fragile = singleslide]{stdio.h}
 	\begin{itemize}
 		\item Declares the basic functions to read and write data
 		\item You know \textit{printf()} and \textit{scanf()}, but there is more:
@@ -139,7 +139,7 @@ puts("Hello World!");
 
 \section{Man page}
 \subsection{}
-\begin{frame}[fragile]{Documentation}
+\begin{frame}[fragile = singleslide]{Documentation}
 	Learning all the library functions is way less effective than knowing where to look them up quickly. \\
 	\textit{Man page} is a Unix tool containing documentation of programs, system calls and libraries - such as the C standard library. \\ \ \\
 	To access a certain man page, just type:
@@ -152,7 +152,7 @@ $ man printf
 \end{lstlisting}
 However, this describes the shell command \textit{printf}.
 \end{frame}
-\begin{frame}[fragile]{Effective use of \textit{man}}
+\begin{frame}[fragile = singleslide]{Effective use of \textit{man}}
 	Man has many sections, library functions are in \#3. \\
 	Write the section number between \textit{man} and the page:
 	\begin{lstlisting}[numbers=none]
