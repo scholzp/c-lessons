@@ -1,0 +1,254 @@
+\input{../templates/course_definitions}
+\input{../templates/course_information}
+
+\title{C-Lessons}
+\subtitle{Variables}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+\begin{frame}{Overview}
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Usage}
+	Declaration:
+	\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
+type identifier;
+\end{lstlisting}
+	Assignment: 
+	\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
+identifier = value;
+\end{lstlisting}
+	Definition (all at once):
+	\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
+type identifier = value;
+\end{lstlisting}
+	Example:
+	\begin{lstlisting}[numbers=none]
+int number;                 /* declaration */
+number = 42;                /* assignment */
+int another_number = 23;    /* definition */
+
+\end{lstlisting}
+\end{frame}
+
+%---------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Saving lines}
+	Multiple declarations
+	\begin{lstlisting}[numbers=none]
+int number, another_number;
+\end{lstlisting}
+	Multiple Definitions
+	\begin{lstlisting}[numbers=none]
+int number = 42, anothernumber = 23;
+\end{lstlisting}\ \\\ \\
+But be careful:
+\begin{columns}[c]
+	\column{.4\textwidth}
+	\begin{lstlisting}[numbers=none]
+int a = 23, b = 23;
+\end{lstlisting}
+	\column{.12\textwidth}
+	\centering
+	$\neq$
+	\column{.3\textwidth}
+	\begin{lstlisting}[numbers=none]
+int a, b = 23;
+\end{lstlisting}
+\end{columns}\ \\ \ \\
+$\rightarrow$ Avoid multiple variable definitions at one line!
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------
+\begin{frame}{Valid identifiers}
+	\begin{itemize}
+		\item Consist of English letters (no \textit{ß}, \textit{ä}, \textit{ö}, \textit{ü}), numbers and underscore (\_)
+		\item Start with a letter or underscore
+		\item Are case sensitive (\textit{number} differs from \textit{Number})
+		\item Must not be reserved words:
+	\end{itemize}
+    {\scriptsize\tt\begin{tabular}{cccccccc}
+        auto	& else	& long	& switch & break	& enum	& register	& typedef\\
+        case	& extern	& return	& union & char	& float	& short	& unsigned\\
+        const	& for	& signed	& void & continue	& goto	& sizeof	& volatile\\
+        default	& if	& static	& while & do	& int	& struct &   double
+    \end{tabular}}
+    \\\bigskip
+	\textbf{Style}:\\
+	\begin{itemize}
+		\item Stay in one language (English recommended)
+		\item Decide whether to use \textit{camelCaseIdentifiers} or \textit{snake\_case\_identifiers}.\\
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Speaking identifiers}
+	\begin{lstlisting}
+/* calculate volume of square pyramid */
+int a, b, c;
+a = 3;
+b = 2;
+c = (1 / 3) * a * a * b;
+\end{lstlisting}
+\centering
+$\Downarrow$
+	\begin{lstlisting}
+/* calculate volume of square pyramid */
+int length, height, volume;
+length = 3;
+height = 2;
+volume = (1 / 3) * length * length * height;
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------
+\begin{frame}{Use speaking identifiers.}
+	\LARGE
+	\centering
+	Please, use speaking identifiers.\footnotemark
+	
+	\footnotetext[1]{Seriously, use speaking identifiers.}
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------
+\section{Data types}
+\subsection{}
+\begin{frame}[fragile]{Integer numbers}
+	\begin{itemize}
+		\item Keywords: \textit{int}, \textit{short}, \textit{long}
+		\item Stored as a binary number with fixed length
+		\item Can be \textit{signed}(default) or \textit{unsigned}
+		\item Actual size of \textit{int}, \textit{short}, \textit{long} depends on architecture
+	\end{itemize}\ \\
+	\ \\
+	Example (64 Bit):
+	\begin{lstlisting}[numbers=none]
+int a;          /* Range: -2.147.483.648 to 2.147.483.647 */
+unsigned short b; /* Range: 0 to 65.535 */
+\end{lstlisting}
+\end{frame}
+
+%---------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Floating point numbers}
+	\begin{itemize}
+		\item Keywords: \textit{float}, \textit{double}, \textit{long double}
+		\item Stored as specified in \textit{IEEE 754 Standard} TL;DR
+		\item Special values for $\infty$, $-\infty$, NaN
+		\item Useful for fractions and very large numbers
+		\item Type a decimal point instead of a comma!
+	\end{itemize}\ \\
+	\ \\
+	Example:
+	\begin{lstlisting}[numbers=none]
+float x = 0.125;          /* Precision: 7 to 8 digits */
+double y = 111111.111111; /* Precision: 15 to 16 digits */
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Characters}
+	\begin{itemize}
+		\item Keyword: \textit{char}
+		\item Can be \textit{signed}(default) or \textit{unsigned}	
+		\item Size: 1 Byte (8 Bit) on almost every architecture
+		\item Intended to represent a single character
+		\item Stores its \textit{ASCII} number (e.g. 'A' $\Rightarrow$ 65)
+	\end{itemize}\ \\
+	\ \\
+	You can define a \textit{char} either by its ASCII number or by its symbol:
+	\begin{lstlisting}[numbers=none]
+char a = 65;
+char b = 'A';       /* use single quotation marks */
+\end{lstlisting}
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------
+\section{Variable I/O}
+\subsection{}
+\begin{frame}[fragile]{\textit{printf()} with placeholders}
+	The string you pass to \textit{printf} may contain placeholders:
+	\begin{lstlisting}[numbers=none]
+int a = 3;
+int b = 5;
+float c = 7.4;
+printf("a: %d\n", a);
+printf("b: %d\nc: %f\n", b, c);
+\end{lstlisting}
+Output:\begin{lstlisting}[numbers=none]
+a: 3
+b: 5
+c: 7.4
+\end{lstlisting}
+You can insert any amount of placeholders. For each placeholder, you have to pass a value of the corresponding type.
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------
+\begin{frame}{Example placeholders}
+	The placeholder determines how the value is interpreted.
+	To avoid compiler warnings, only use the following combinations: \\ \ \\
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{type} & \textbf{description} & \textbf{type of argument} \\\hline
+		\%c & single character & char, int (if $<=$ 255) \\\hline
+		\%d & decimal number & char, int \\\hline
+		\%u & unsigned decimal number & unsigned char, unsigned int \\\hline
+		\%X & hexadecimal number & char, int \\\hline
+		\%ld & long decimal number & long \\\hline
+		\%f & floating point number & float, double \\\hline
+	\end{tabular}
+	\\
+	Have a look at the \href{https://github.com/scholzp/c-lessons/blob/master/cheatsheet/cheatsheet.pdf}{Cheatsheet}!
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Variable input}
+	\textit{scanf()} is another useful function from the standard library.
+	\begin{itemize}
+		\item Like \textit{printf()}, it is declared in \textit{stdio.h}
+		\item Like \textit{printf()}, it has a format string with placeholders
+		\item You can use it to read values of primitive datatypes from the command line
+	\end{itemize}
+	\ \\ \ \\ Example:
+	\begin{lstlisting}[numbers=none]
+int i;
+scanf("%d", &i);
+\end{lstlisting}
+	After calling \textit{scanf()}, the program waits for the user to input a value in the command line.
+	After pressing the \textit{return} key, that value is stored in \textit{i}.
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------
+\begin{frame}{Note:}
+	\begin{itemize}
+		\item \textit{scanf()} uses the same placeholders as \textit{printf()}
+		\item You must type an \textit{\&} before each variable identifier \\
+			(more about this later)
+		\item If you read a number (using \%d, \%u etc.), interpretation
+		\begin{itemize}
+			\item Starts at first digit
+			\item Ends before last non digit character
+		\end{itemize}
+		\item If you use \%c, the first character of the user input is interpreted (this may be a ' ' as well!)
+	\end{itemize}
+	Never trust the user: they may enter a blank line while you expect a number, which means your input variable is still undefined!
+\end{frame}
+%------------------------------------------- end ---------------------------------------------------------
+\section{Related Task}
+\begin{frame}{Task: Rot13}
+	\href{http://fsr.github.io/c-lessons/exercises/02_rot_13.html}{Task as online:} \newline
+    Rot13 is an ancient cryptography procedure. 
+    It encrypts a message by shifting each character 13 letters in alphabetical order (modulo z).\newline
+
+    Write a program that takes a printable character and prints its Rot13 encrypted version. 
+    Assume that the input is always a small character. \newline
+
+    Experts: Get it working with keeping the character case (a -\textgreater, B -\textgreater O). 
+    Keep it simple. Do not use stuff that has not been introduced yet.
+
+\end{frame}
+
+\end{document}

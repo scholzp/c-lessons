@@ -1,0 +1,61 @@
+\iffalse\documentclass{article}\fi
+\input{../templates/course_definitions}
+\input{../templates/course_information}
+
+\title{Java}
+\subtitle{Introduction}
+\date{\today}
+
+
+\begin{document}
+
+% \section{Organisation}
+\begin{frame}
+	\titlepage
+\end{frame}
+\begin{frame}{Overview}
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+\end{frame}
+\begin{frame}{Programs for programming}
+	For developing our own programs, we will use two kinds of software:\\
+	\bigskip
+	\textbf{Plain} text editors:
+	\begin{itemize}
+		\item vim (powerful, but needs getting used to)
+		\item gedit (easy to use, comes with Gnome)
+		\item Notepad(++) (for Windows users)
+	\end{itemize}
+	\bigskip
+	Compilers:
+	\begin{itemize}
+		\item \textbf{gcc}
+		\item clang
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------
+\begin{frame}[fragile ]{gcc for Unix-based operating systems}
+	You maybe have to update your system before the installation\verb|!| \\
+	Ubuntu / Debian:
+	\begin{lstlisting}[numbers=none]
+$ sudo apt-get update
+$ sudo apt-get install gcc
+    \end{lstlisting}
+	\bigskip
+	Arch Linux:
+	\begin{lstlisting}[numbers=none]
+$ sudo pacman -Syu
+$ sudo pacman -S gcc
+    \end{lstlisting}
+	\bigskip
+	Mac OS X:
+	\begin{lstlisting}[numbers=none]
+$ brew install gcc
+    \end{lstlisting}
+	\bigskip
+	... and you're done ;-)
+\end{frame}
+
+
+\end{document}
