@@ -1,0 +1,358 @@
+\input{../templates/course_definitions}
+\input{../templates/course_information}
+
+\title{C-Lessons}
+\subtitle{Variables}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+\begin{frame}{Overview}
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\section{Motivation}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}{Back in control}
+	Even though C is a sequential programming language, the program flow can branch.
+	Use conditions to determine the behaviour of your program.
+	\centerline{\includegraphics[scale=.27]{../img/friendship.jpg}}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\section{Arithmetic operators}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+\frametitle{Let's calc}
+	Each expression (variables or values) you type in gets evaluated.\\
+	You can use operators to combine existing expressions to new ones.
+\ \\
+	\begin{itemize}
+		\item +, -, *, / as all of you should know
+		\item \% is the modulo (remainder) operator
+		\item *, /, \% get evaluated before +, -
+		\item Operations in (  ) are of higher precedence
+	\end{itemize}\ \\\ \\
+	\begin{lstlisting}
+int a = 5;      /* value 5 */
+int b = a + 3;  /* value 8 */
+char c = 120;   /* 120 */
+char d = 2 * c; /* why is that not 240? */
+\end{lstlisting}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{You see, it's not that easy}
+	\begin{itemize}
+		\item Variables may overflow
+		\item You shall not divide by zero
+		\item Integer division differs from floating point division
+		\item You can use operators between different data types
+		\begin{itemize}
+			\item[--] mixing different sizes
+			\item[--] mixing integer and floating point variables
+		\end{itemize}
+	\end{itemize}
+	\ \\\ \\
+	\begin{lstlisting}[numbers=none]
+int i1 = 42, i2 = 23;
+short s = 13;
+float f = 3.14;
+
+i1 / i2;    /* results in 1, not a real division */
+i1 + s;     /* int and short, result is int */
+i1 / f;     /* result is float, actual division */
+\end{lstlisting}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Syntactic sugar}
+	As you have seen, you can use any expression on the right side of the assignment operator.\\
+	This expression often contains the variable it is assigned to.\\\ \\
+	To avoid redundancy, C offers the following short forms:\\
+	\begin{lstlisting}[numbers=none]
+a += 4;     /* a = a + 4; */
+a -= 4;     /* a = a - 4; */
+a *= b;     /* a = a * b; */
+b /= 42;    /* b = b / 42; */
+b %= 2;     /* b = b % 2; */
+c++;        /* c = c + 1; */
+++c;        /* c = c + 1; */
+c--;        /* c = c - 1; */
+--c;        /* c = c - 1; */
+\end{lstlisting}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\section{Relational operators}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}{The truth about expressions}
+	Expressions can also be evaluated to truth values.\\
+	If a value or a variable equals 0, its corresponding truth value is \textit{false}. Otherwise it's \textit{true}.\\
+	The representations of \textit{false} and \textit{true} are 0 and 1.\\
+	An expression containing relational operators gets evaluated to such a truth value.\\
+	\ \\Relational operators:
+	\begin{itemize}
+		\item $<$, $>$, $<$=, $>$=
+		\item == for "equal to"
+		\item != for "not equal to"
+	\end{itemize}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Do not get confused}
+	Imagine the following
+	\begin{lstlisting}[numbers=none]
+(5 < 7) =@\,@= 1;   /* evaluated to 1 */
+\end{lstlisting}
+\ \\\ \\Why?
+\begin{itemize}
+	\item<2-> (5 $<$ 7) is \textbf{true} $\rightarrow$ \textbf{1}
+	\item<3-> 1 == 1 is \textbf{true} $\rightarrow$ \textbf{1}
+\end{itemize}
+
+%-----------------------------------------------------------------------------------------------
+\end{frame}
+\begin{frame}[fragile]{A sign meant...}
+	Assignments are expressions that get evaluated and have a truth value, too.
+	Consider:
+		\begin{lstlisting}[numbers=none]
+c = 0;          /* 0 -> false */
+c = 2 * 5;      /* 2 * 5 = 10,   c = 10, true */
+c = (0 < 1);    /* 0 < 1 = true, c = 1,  true */
+
+a = (b =@\,@= (c = d)); /* Wat? */
+\end{lstlisting}\ \\
+	\pause
+	\ \\\textit{c++} expressions are evaluated before the increment while \textit{++c} increments first (the same applies on \textit{c--} and \textit{--c}):
+	\begin{lstlisting}[numbers=none]
+int c = 42;
+int a = c++;    /* evaluates to c,     a is 42, c is 43 */
+int b = ++c;    /* evaluates to c + 1, b is 44, c is 44 */
+\end{lstlisting}
+\end{frame}
+%-----------------------------------------------------------------------------------------------
+\section{Logical operators}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}{Boolean arithmetic}
+	Truth values can be connected by boolean operators resulting in a new truth value.
+	\begin{itemize}
+		\item \&\& for AND (results in \textbf{1} if both operands are true, else \textbf{0})
+		\item $||$ for OR (results in \textbf{1} if at least one operator is true, else \textbf{0})
+		\item ! for NOT (results in \textbf{1} if the operand is false, else \textbf{0})
+	\end{itemize}
+	\ \\\ \\Precedence order:\\
+	\centering
+	! \ $>$ \ \&\& \ $>$ \ $||$ 
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Seems logical}
+	Caution: a condition will only be evaluated until its result is definitive.
+	\begin{itemize}
+	\item $a$ \&\& $b$: $b$ will only be evaluated if $a$ is true.
+	\item $a$ $||$ $b$: $b$ will only be evaluated if $a$ is false.
+	\end{itemize}
+	\begin{lstlisting}[numbers=none]
+/* safely check if a is divisible by b */
+if ((b != 0) && (a % b =@\,@= 0)) {
+    ...
+}
+\end{lstlisting} 
+	\bigskip
+	\begin{uncoverenv}<2->
+		\begin{itemize}
+			\item How do you get NAND, NOR and XOR?
+		\end{itemize}
+	\end{uncoverenv}
+	\begin{uncoverenv}<3->
+		\begin{lstlisting}[numbers=none]
+!(a && b);              /* NAND */
+!(a || b);              /* NOR */
+(a && !b) || (!a && b); /* XOR */
+\end{lstlisting}
+	\end{uncoverenv}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\section{Conditions}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{if...else}
+	To make decisions during run time, you can use the truth value of an expression:
+	\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
+if (condition)
+    statement1;
+else
+    statement2;
+\end{lstlisting}
+	Now \textbf{statement1} is only executed if the truth value of \textbf{condition} is \textit{true}. Otherwise \textbf{statement2} is executed. The \textit{else} part is optional.\\\ \\
+	For multiple statements in the \textit{if} or \textit{else body}, use braces:
+	\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
+if (condition) {
+    statement1;
+    statement2;
+}
+\end{lstlisting}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{else if}
+	To differentiate between more than two cases, you can use the if condition as a statement in the else body:\\\ \\
+	\begin{columns}[c]
+		\column{0.5\textwidth}
+		\begin{tikzpicture}[font=\footnotesize]
+			\node at (0,0)[above]{condition1};
+			\draw[->] (0,0) -- (0,-3) node[green, above=4em, right]{true};
+			\node at (0,-3)[below]{st.1};
+			\draw[->] (0,0) -- (.7,-.7) node[red, above=1.3em, right=-1.3em]{false};
+			
+			\node at (1,-1)[above]{condition2};
+			\draw[->] (1,-1) -- (1,-3) node[green, above=2.5em, right]{true};
+			\node at (1,-3)[below]{st.2};
+			\draw[->] (1,-1) -- (1.7,-1.7) node[red, above=1.3em, right=-1.3em]{false};
+			
+			\node at (2,-2)[above]{condition3};
+			\draw[->] (2,-2) -- (2,-3) node[green, above=.7em, right]{true};
+			\node at (2,-3)[below]{st.3};
+			\draw[->] (2,-2) -- (3,-3) node[red, above=2em, right=-2em]{false};
+			
+			\node at (3,-3)[below]{st.4};
+		\end{tikzpicture}
+		\column{0.5\textwidth}
+			\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
+if (condition1)
+    statement1;
+else if (condition2)
+    statement2;
+else if (condition3)
+    statement3;
+else
+    statement4;
+\end{lstlisting}
+	\end{columns}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{switch}
+	If you have to check one variable for many constant values, \textit{switch case} is your friend:
+	\begin{lstlisting}[numbers=none,basicstyle=\itshape\footnotesize]
+switch (variable) {
+    case option1: statement1; break;
+    case option2: statement2; break;
+    case option3: statement3; break;
+    default: statement4; break;
+}
+\end{lstlisting}
+	\begin{itemize}
+	\item \textit{case option} defines a jump label
+	\item More than one statement after it possible without braces
+	\item All statements until the next \textit{break;} will be executed
+\end{itemize}	 
+\end{frame}
+%-----------------------------------------------------------------------------------------------
+\section{Remarks}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Scopes}
+	You begin a block with a '\{' and end it with a '\}':
+	\begin{lstlisting}
+int i = 4;
+{
+    i = 3;      /* valid */
+    int j = 5;
+}
+j = 2;          /* invalid, j is not in scope */
+\end{lstlisting}
+	\begin{itemize}
+		\item Program area in which an identifier may be used
+		\item Referring to it anywhere else causes compilation errors
+		\item Starts at the line of declaration
+		\item Ends at the end of the block, in which the variable was declared
+	\end{itemize}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Shadowing identifiers}
+	When redeclaring identifiers inside a block, they refer to a new variable:
+	\begin{lstlisting}
+int i = 3;      /* Defining i with value 3 */
+{
+    i = 2;      /* "Outside" i is now 2 */
+    int i = 4;  /* New "inside" i */
+    i = 7;      /* Changes "inside" i only */
+}
+                /* "Outside" i is still 2 */
+\end{lstlisting}\ \\
+    \medskip
+    \begin{itemize}
+        \item[Style:] When nesting blocks, indent every inner block by
+            one additional tab!
+    \end{itemize}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{A few words on style}
+
+	\begin{itemize}
+		\item Typing \textbf{if (cond)} instead of \textbf{if(cond)} helps people to differentiate between control structures and function calls faster
+		\item When starting a new block, you should type ) \{ rather than )\{
+		\item Do not start a new block for a single statement
+		\item Do not put statements and conditions on the same line
+	\end{itemize}
+	\begin{lstlisting}[numbers=none]
+if(cond){ statement; }  /* bad style */
+
+if (cond) {             /* looks better, still bad style */
+    statement;
+}
+
+if (cond)
+    statement;          /* looks way clearer */
+\end{lstlisting}
+\end{frame}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{More words on style}
+	\begin{itemize}
+		\item if you use a block anywhere in an \textbf{if ... else} structure, put all blocks of this structure in braces
+	\end{itemize}
+	\begin{lstlisting}[numbers=none]
+if (cond) /* bad style, inconsistent */
+    statement;
+else {
+    statement;
+    statement;
+}
+
+if (cond) {/* way better style */
+    statement;
+} else {
+    statement;
+    statement;
+}
+\end{lstlisting}
+\end{frame}
+%-----------------------------------------------------------------------------------------------
+\section{Related Task}
+
+%-----------------------------------------------------------------------------------------------
+\begin{frame}{Feedback}
+\href{http://fsr.github.io/c-lessons/exercises/06_feedback.html}{Task as online:} \newline
+Write a program, that asks the user to enter a character and answers whether the input
+is a letter, a number, or a special char. \newline
+
+Experts: If the character is a small letter, also print the capital letter and vice versa.
+
+\end{frame}
+
+\end{document}
