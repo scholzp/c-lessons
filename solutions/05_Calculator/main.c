@@ -13,11 +13,11 @@ int main(void){
 	int op_1, op_2; 
 	char operation[10];
 	printf("Please enter first operand: \n");
-	scanf("%d", &op_1);
+	scanf("%1d", &op_1);
 	printf("Please enter second operand: \n");
-	scanf("%d", &op_2);
+	scanf("%1d", &op_2);
 	printf("Enter operation (+,-,*,/,%% or add, substract, multiply, divide, remainder): \n");
-	scanf(" %s", &operation);
+	scanf(" %10s", &operation);
 	//     ^------ space to consume the newline.
 	switch(operation[0]){
 		case 43 : result = op_1 + op_2; break;

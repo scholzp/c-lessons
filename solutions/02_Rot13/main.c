@@ -2,23 +2,23 @@
 
 /*
 *	The specifier controls how the char c is interpreted when printed.
-*	Actually char is a number with the size of at leat 8 bit. So arithmetics 
-*	can be performed with casting ot conversion. 
+*	Actually char is a number with the size of at leat 8 bit. So arithmetics
+*	can be performed with casting ot conversion.
 *
 */
 
 int main(void){
-	char c;
+	unsigned char c;
 	printf("Please enter a character to encrypt. \n");
 	scanf("%c", &c);
 	//upper case letters
 	if(c > 64 && c < 91){
-		c = c + 13;
+		c += 13;
 		if(c > 90)
-			c -= 90 + 65;	
-	//lower case letters	
+			c -= 90 + 65;
+	//lower case letters
 	}else if(c > 97 && c < 123){
-		c = c + 13;
+		c += 13;
 		if(c > 123)
 			c -= 123 + 97;
 	//evrything else

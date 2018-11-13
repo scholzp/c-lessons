@@ -2,8 +2,10 @@
 \input{../templates/course_information}
 
 \title{C-Lessons}
-\subtitle{Variables}
+\subtitle{Control structures 2}
 \date{\today}
+
+\usepackage{mathtools}
 
 \begin{document}
 
@@ -43,7 +45,22 @@ while (condition);
 for (initialization; condition; statement)
     statement;
     \end{lstlisting}
-	For multiple statements again, use braces.
+\end{frame}
+
+%----------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Loops}
+	To use more than one \textit{Statement} in your loop, use curly brackets like in the following example:
+	\begin{lstlisting}[numbers=left]
+for (int i = 5; i >= 0; --i) {
+    if(i > 0)
+        printf("This loop will run %i more times.\n", i);
+    else {
+        printf("This was the last run.\n");
+        printf("Now leaving the loop...\n");
+    }
+}
+    \end{lstlisting}
+    
 \end{frame}
 
 %----------------------------------------------------------------------------------------------------
@@ -52,7 +69,7 @@ for (initialization; condition; statement)
 	\begin{lstlisting}
 int i = 2;
 while (i > 0)
-	- -i;
+	--i;
 printf("done\n");
 \end{lstlisting}
 	\begin{enumerate}[<+(1)->]
@@ -73,7 +90,7 @@ printf("done\n");
 	\begin{lstlisting}[numbers=none]
 int i = 3;
 do
-	- -i;
+	--i;
 while (i < 1);
 \end{lstlisting}
 	\bigskip
@@ -210,5 +227,18 @@ for (i = 1; i < 9; printf("%d\n", ++i))     /* clear */
 \end{frame}
 
 %----------------------------------------------------------------------------------------------------
+\section{Related Task}
+\begin{frame}{Power and faculty}
+    \href{http://fsr.github.io/c-lessons/exercises/08_power_and_faculty.html}{Task as online:} \newline
+    Write a program that takes two numbers a, b from the user and calculates \begin{math}{a^b}\end{math}
+    and \begin{math}{b^a}\end{math}. Try using one 'for' and one 'while' loop. 
+    \newline 
+    \newline
+    Experts: Write a program that calculates the factorial (\begin{math}{a!}\end{math} and \begin{math}{b!}\end{math}) of the user input.
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------------------
+
 
 \end{document}
