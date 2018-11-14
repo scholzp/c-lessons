@@ -12,7 +12,7 @@
 */
 
 int main(void){
-	printf("Bitte eine Zeichen eingeben: \n");
+	printf("Bitte ein Zeichen eingeben: \n");
 	char byte;
 	scanf("%c1", &byte);
 	printf("Die ACII-Interpretation von %c ist %d.\n", byte, byte);
@@ -20,7 +20,7 @@ int main(void){
 	//Expert task
 	char buffer[5];
 	printf("Bitte 5 Zeichen eingeben.\n");
-	scanf("%s5", &buffer);
+	scanf("%5s", buffer);
 	printf("%c%c%c%c%c\n", buffer[4], buffer[3], buffer[2], buffer[1], buffer[0]);
 		
 	return 0;
