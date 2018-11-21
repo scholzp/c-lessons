@@ -5,6 +5,7 @@
 \subtitle{Variables}
 \date{\today}
 
+\usetikzlibrary{tikzmark}
 \begin{document}
 
 \begin{frame}
@@ -30,17 +31,18 @@
 		\column{.34\textwidth}<5->
 		argument declarations, seperated by commas or \textit{void}, if there are none
 	\end{columns}
-	\begin{textblock}{7}(1.5,3.5)
-		\begin{tikzpicture}[x=1.2cm,y=.5cm]
-			\only<3>{\draw[red] (-.3,0) edge[out=270,in=90,->,shorten >=0ex] (0,-2);}
-			\uncover<4->{\draw (-.3,0) edge[out=270,in=90,->,shorten >=0ex] (0,-2);}
-			\only<4>{\draw[red] (3.5,0) edge[out=270,in=90,->,shorten >=0ex] (2.25,-2);}
-			\uncover<5->{\draw (3.5,0) edge[out=270,in=90,->,shorten >=0ex] (2.25,-2);}
-			\only<5>{\draw[red] (7,0) edge[out=270,in=90,->,shorten >=.0ex] (4.5,-2);}
-			\uncover<6->{\draw (7,0) edge[out=270,in=90,->,shorten >=.0ex] (4.5,-2);}
-		\end{tikzpicture}
+	\begin{textblock}{7}(1.5,5.5)
+        \begin{tikzpicture}[x=1.2cm,y=0.9cm]
+            \only<3>{\draw[red] (-.3,1) edge[out=270,in=90,->,shorten >=0ex] (0,-0.5);}
+            \uncover<4->{\draw (-.3,1) edge[out=270,in=90,->,shorten >=0ex] (0,-0.5);}
+            \only<4>{\draw[red] (3.5,1) edge[out=270,in=90,->,shorten >=0ex] (2.25,-0.5);}
+            \uncover<5->{\draw (3.5,1) edge[out=270,in=90,->,shorten >=0ex] (2.25,-0.5);}
+            \only<5>{\draw[red] (7,1) edge[out=270,in=90,->,shorten >=.0ex] (4.5,-0.5);}
+            \uncover<6->{\draw (7,1) edge[out=270,in=90,->,shorten >=.0ex] (4.5,-0.5);}
+        \end{tikzpicture}
 	\end{textblock}
-	\ \\\ \\\ \\
+	\ \\\ 
+	
     \begin{onlyenv}<1>
 	\begin{lstlisting}[numbers=none]
 int main(void) {
@@ -51,9 +53,9 @@ int main(void) {
     \end{onlyenv}
     \begin{onlyenv}<2->
 	\begin{lstlisting}[numbers=none,basicstyle=\itshape\small]
-§return_type§ §identifier§(§argument_list§) {
-	§function_body§
-	return §expression§;
+return_type identifier(argument_list) {
+	function_body
+	return expression;
 }
 \end{lstlisting}
     \end{onlyenv}
@@ -64,15 +66,16 @@ int main(void) {
 		\column{.5\textwidth}<7->
 		value this function returns or empty, if the return value is \textit{void}
 	\end{columns}
-	\begin{textblock}{7}(.5,5.2)
+	\begin{textblock}{7}(.5,8.5)
 		\begin{tikzpicture}
-			\only<6>{\draw[red] (1.5,0) edge[out=90,in=180,->,shorten >=0ex] (0,2);}
+			\only<6>{\draw[red] (1.8,0) edge[out=90,in=180,->,shorten >=0ex] (0,2);}
 			\uncover<7->{\draw (1.5,0) edge[out=90,in=180,->,shorten >=0ex] (0,2);}
 			\only<7>{\draw[red] (8,0) edge[out=90,in=270,->,shorten >=0ex] (2.4,1.5);}
 			\uncover<8->{\draw (8,0) edge[out=90,in=270,->,shorten >=0ex] (2.4,1.5);}
 		\end{tikzpicture}
 	\end{textblock}
 \end{frame}
+
 
 %-------------------------------------------------------------------------------------------------
 \begin{frame}[fragile]{Passing arguments}
@@ -238,16 +241,76 @@ void foo(void) {
 As an example, take a look at this function calculating $base^{exponent}$:
 	\begin{lstlisting}
 int power(int base, int exponent) {
-	if (exponent =@\,@= 0)
+	if (exponent == 0)
 		return 1;
 	return base * power(base, exponent - 1);
 }
 \end{lstlisting}
 	\begin{itemize}
 		\item $a^{0} = 1 \rightarrow$ \textit{power(a, 0}) just returns \textit{1}
-		\item $a^{b} = a * a^{b-1} \rightarrow$ recursive call of \textit{power(a, b-1)}
+		\item $a^{b} = a \cdot a^{b-1} \rightarrow$ recursive call of \textit{power(a, b-1)}
 	\end{itemize}
 \end{frame}
 %----------------------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]{Example {power(2,3)}}
+	\begin{lstlisting}
+int power(int base, int exponent) {
+	if (exponent == 0)
+		return 1;
+	return base * power(base, exponent - 1);
+}\end{lstlisting}
+	\begin{columns}[T]
+		\column{.5\textwidth}<1->
+		1st call: power(2,3) \tikzmark{c11}
+		\column{.5\textwidth}<8->
+		\tikzmark{c12} return \begin{math}{2 \cdot {power(2,2)} = 2 \cdot 4 = 8} \end{math}  
+	\end{columns}
+    \vspace{5mm}
+    \begin{columns}[T]
+		\column{.5\textwidth}<2->
+		2nd call: power(2,2) \tikzmark{c21}
+		\column{.5\textwidth}<7-> 
+		\tikzmark{c22} return \begin{math}{2 \cdot {power(2,1)} = 2 \cdot 2 = 4} \end{math} 
+	\end{columns}
+    \vspace{5mm}
+    \begin{columns}[T]
+		\column{.5\textwidth}<3->
+		3rd call: power(2,1)   \tikzmark{c31}
+		\column{.5\textwidth}<6->
+		\tikzmark{c32} return \begin{math}{2 \cdot \textit{power(2,0)} = 2 \cdot 1 = 2} \end{math}   
+	\end{columns}
+    \vspace{5mm}
+	\begin{columns}[T]
+		\column{.5\textwidth}<4->
+		4th call: power(2,0)   \tikzmark{c41}
+		\column{.5\textwidth}<5->
+		\tikzmark{c42} return \begin{math}{1} \end{math} 
+	\end{columns}
+
+	\begin{textblock}{7}(1.5,4.5)
+        \begin{tikzpicture}[overlay, remember picture, yshift=.25\baselineskip, shorten >=.5pt, shorten <=.5pt]
+            \uncover<2->{\draw [->] ({pic cs:c11}) [bend left] to ({pic cs:c21});}
+            \uncover<3->{\draw [->] ({pic cs:c21}) [bend left] to ({pic cs:c31});}
+            
+            \uncover<4->{\draw [->] ({pic cs:c31}) [bend left] to ({pic cs:c41});}
+            \uncover<5->{\draw [->] ({pic cs:c41}) [bend right] to ({pic cs:c42});}
+            \uncover<6->{\draw [->] ({pic cs:c42}) [bend left] to ({pic cs:c32});}
+            \uncover<7->{\draw [->] ({pic cs:c32}) [bend left] to ({pic cs:c22});}
+            \uncover<8->{\draw [->] ({pic cs:c22}) [bend left] to ({pic cs:c12});}
+        \end{tikzpicture}
+	\end{textblock}
+\end{frame}
+%----------------------------------------------------------------------------------------------------
+
+\section{Related Task}
+\begin{frame}{Power and faculty}
+    \href{http://fsr.github.io/c-lessons/exercises/11_practising_recursion.htmll}{Task as online:} \newline
+    Write a function that takes a numbers a from the user and calculates \begin{math}{a!}\end{math}
+    \newline 
+    \newline
+    Experts: Write a program that calculates the fibonacci number of a fib(a) of the user input a.
+\end{frame}
+
 
 \end{document}
