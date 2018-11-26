@@ -15,8 +15,12 @@
 \begin{frame}{Contents}
 	\tableofcontents
 \end{frame}
+%-------------------------------------------------------------------------------------------------
 
 \section{Arrays}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}{Let's talk about memory}
 	\begin{itemize}
 		\item Consider a program using 4 characters.
@@ -140,6 +144,8 @@
 	\uncover<5->{C offers an opportunity to access variables through an index: arrays}
 \end{frame}
 
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Definition}
 	To only declare an array, you have to specify the size.
 	\begin{lstlisting}[numbers=none, basicstyle=\itshape\small]
@@ -159,6 +165,9 @@ leet[3] = 7;
 \end{lstlisting}
 	\textbf{Note:} The first index is 0, the last one is \textit{size} - 1
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Partial initialization}
 	If you declare an array, memory gets reserved. This memory is full of trash data. Before you initialize the array, you can not determine what is in.\\
 	\ \\
@@ -171,6 +180,9 @@ int arr[5] = {1, 3};	/* initializes {1, 3, 0, 0, 0} */
 char clear[255] = {0};
 \end{lstlisting}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Access}
 	You access an array element, like defining it, through its index.
 	\begin{lstlisting}[numbers=none]
@@ -189,6 +201,9 @@ int leet[] = {1, 3, 3, 7};
 int whatIf = leet[4];	/* feel free to try out */
 \end{lstlisting}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Looping through arrays}
 	The fact, that you can use a statement as index allows us to easily loop through an array.
 	\begin{lstlisting}[numbers=none]
@@ -197,10 +212,12 @@ for(int i = 0; i < 4; ++i)
 	printf("%d\n", leet[i]);
 \end{lstlisting}\ \\\ \\
 	\uncover<2->{There also is a way to determine the length of an array. But it's a little tricky and requires previous knowledge.}
-
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
 \section{sizeof}
-\subsection{}
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Remember, Remember}
 	Old and busted:
 	\begin{itemize}
@@ -220,6 +237,8 @@ int sizeOfInt = sizeof(int); /* depending on architecture */
 	\textbf{Note:} Parentheses are required when passing types and recommended
 	when passing identifiers.
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]{Sizeof an array}
 	What if?
@@ -248,8 +267,10 @@ for(int i = 0; i < (sizeof range / sizeof range[0]); ++i) {
 	\end{uncoverenv}
 \end{frame}
 
+%-------------------------------------------------------------------------------------------------
 \section{Strings n' more}
-\subsection{}
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Oh, hello again}
 	In C, strings are handled as zero terminated Character arrays.\\
 	In memory, the string "Hello World!" would look as follows:\\
@@ -301,6 +322,8 @@ char hello[] = "Hello World!";
 \end{lstlisting}
 \end{frame}
 
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Printing strings}
 	You can print strings with printf with the placeholder \textit{\%s}.\\
 	It expects an array of chars as an argument:\bigskip
@@ -315,6 +338,8 @@ char hello[] = "Hello World!";
 puts(hello);
 \end{lstlisting}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]{String input}
 	You \textbf{could} use \textit{scanf()} for string input, but it is kind of a mess. You better use \textit{fgets}:
@@ -341,7 +366,9 @@ int foo(char arr[]) {
 		\item So you may want to pass the size as a second argument
 	\end{itemize}
 \end{frame}
-%
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Arrays of arrays}
 	\begin{itemize}
 		\item Every sub-array is of the same type
@@ -364,7 +391,9 @@ char arr[][4] = {{'f', 'o', 'o', '\0'},
 \end{lstlisting}
 	\end{itemize}
 \end{frame}
-%
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Passing arrays of arrays}
 	\begin{itemize}
 		\item You can also pass arrays of arrays to functions
@@ -382,4 +411,22 @@ int bar(int dim2, char arr[][dim2]) {
 	\item The dimension arguments must be passed before the array itself
 	\end{itemize}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+\section{Related task}
+%-------------------------------------------------------------------------------------------------
+
+\begin{frame}{Array printing function}
+    \href{http://fsr.github.io/c-lessons/exercises/17_array_printing_function.html}{Task as online:} \newline
+    Write a function that prints an Integer array.
+    \newline
+    Experts: Write a function that prints an integer matrix.
+    \newline 
+    \newline
+    Experts: Simulate “real” randomness that cannot be recreated.
+\end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
+
 \end{document}

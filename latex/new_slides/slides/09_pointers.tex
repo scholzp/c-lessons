@@ -161,6 +161,9 @@ pa = &a;	/* initialize pa as pointer to a */
 *pa = 13;	/* change a */
 \end{lstlisting}
 \end{frame}
+
+%---------------------------------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Increment and decrement}
 	If you want to increment or decrement the variable a pointer points to, you have to use Parentheses.
 	\begin{lstlisting}[numbers=none]
@@ -195,6 +198,9 @@ calcRGB("ffffff", &r, &g, &b);
 		\item You now should understand how scanf works.
 	\end{itemize}
 \end{frame}
+
+%---------------------------------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Returning pointers}
 Pointers can be return values, too.\\\ \\
 \textbf{But} 
@@ -343,6 +349,19 @@ int* a, b;	/* pointer and int */
 	A segmentation fault is very common when working with pointers.\\
 	It means you were trying to write on memory your program didn't own. \\
 	Try to avoid those errors, backtracing is hard!
+\end{frame}
+
+%-------------------------------------------------------------------------------------------------
+\section{Related Task}
+%-------------------------------------------------------------------------------------------------
+
+\begin{frame}{Swap}
+    \href{http://fsr.github.io/c-lessons/exercises/23_swap.html}{Task as online}
+    \newline
+    Write a function that swaps the values of 2 variables.
+    \newline 
+    \newline
+    Experts: Write a function, that rotates 3 values in a given direction.
 \end{frame}
 
 %---------------------------------------------------------------------------------------------------------------------------

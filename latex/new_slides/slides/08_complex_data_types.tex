@@ -16,8 +16,9 @@
 	\tableofcontents
 \end{frame}
 
+%-------------------------------------------------------------------------------------------------
 \section{Composite data types}
-\subsection{}
+%-------------------------------------------------------------------------------------------------
 
 \begin{frame}{Limits of primitive data types}
 	Primitive data types are fine as long as you want to
@@ -37,6 +38,8 @@
 	\end{itemize}
 \end{frame}
 
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Data records}
 	Composite data types are derived from primitive data types. You can store any number of primitive variables in one composite variable.
 	\begin{itemize}
@@ -53,6 +56,9 @@ struct person {		/* struct <identifier> */
 \end{lstlisting}
 	A \textit{struct} variable is at least as large as all of its members.
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{\textit{struct} variables}
 	Our new type \textit{struct person} can be used to declare variables any where in its scope:
 	\begin{lstlisting}[numbers=none]
@@ -66,6 +72,9 @@ struct person {
 \end{lstlisting}
 	If we do not need the struct type \textit{person} for further variable declarations, its identifier can be left out.
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Definition and member access}
 	To initialize the \textit{struct} members upon declaration, enclose the values in braces as we did it for arrays:
 	\begin{lstlisting}[numbers=none]
@@ -77,6 +86,9 @@ printf("%d\n", pers_alice.id);
 pers_alice.age++;
 \end{lstlisting}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{\textit{struct}s as \textit{struct} members}
 	An address is rather complicated:
 	\begin{lstlisting}[numbers=none]
@@ -97,6 +109,9 @@ struct person {
 pers_alice.contact.postcode = 15430;
 \end{lstlisting}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{\textit{union}s}
 	\begin{itemize}
 		\item Similar to \textit{struct}s, handle them in the same way
@@ -115,8 +130,11 @@ union compound {
 	The size of a union variable is equal to the size of its largest member.\\
 	$\rightarrow$ saving memory
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
 \section{Enumerations}
-\subsection{}
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Smart aliases}
 	An enumeration consists of identifiers that behave like \textit{constant values}. \\
 	It is declared using the keyword \textit{enum}:
@@ -126,13 +144,16 @@ enum light {
 	YELLOW,
 	GREEN
 };
-\end{lstlisting}
+    \end{lstlisting}
 	Now you can assign the values \textit{red}, \textit{yellow} and \textit{green} to variables of the type \textit{enum light}. Internally they are represented as numbers ($red = 0$, $yellow = 1$ etc.), but
 	\begin{itemize}
 		\item Using the aliases is clear and fancy
 		\item No invalid values (like \textit{-1}) can be assigned
 	\end{itemize}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Profit}
 	You can determine the values of the constants on your own:
 	\begin{lstlisting}[numbers=none]
@@ -152,8 +173,9 @@ char tetris_board[WIDTH][HEIGHT];
 \end{lstlisting}
 \end{frame}
 
+%-------------------------------------------------------------------------------------------------
 \section{Style}
-\subsection{}
+%-------------------------------------------------------------------------------------------------
 \begin{frame}{Consistency}
 	\begin{itemize}
 		\item Since complex type definitions heavily rely on blocks, you should use the same coding conventions on them
@@ -163,6 +185,9 @@ char tetris_board[WIDTH][HEIGHT];
 	$\rightarrow$ Have a global type definition, declare the variables in the local context \\ \ \\
 	Name \textit{enum} constants in CAPITAL letters to visually seperate them from variables.
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{\textbf{typedef}}
 	Sometimes you see people writing code like that:
 	\begin{lstlisting}[numbers=none]
@@ -177,6 +202,9 @@ typedef struct foo {
 		\item If so, is it a \textit{struct} / \textit{union} / \textit{enum} or something really crazy?
 	\end{itemize}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}{Never use \textit{typedef}.}
 	\LARGE
 	\centering
@@ -193,5 +221,25 @@ typedef struct foo {
 	\footnotetext[1]{Seriously, never use \textit{typedef}.}
 \end{frame}
 
-% nothing to do from here on
+%-------------------------------------------------------------------------------------------------
+\section{Related Task}
+%-------------------------------------------------------------------------------------------------
+
+\begin{frame}{Circles}
+    \href{http://fsr.github.io/c-lessons/exercises/21_Circles.html}{Task as online}
+    \newline
+    A point in 2D consists of two positions: x and y (both float). A circle consists of a 
+    centre (point), a radius, a circumference and an area (all float).
+    \newline
+    Write a program that reads two positions and a radius from the command line. They should
+    be stored in a struct circle as described above along with its remaining parameters 
+    (calculate them!). Then, print the resulting circle.
+    \newline 
+    \newline
+    Experts: Write a function that takes two circles as arguments and returns a circle that 
+    goes through their centres.
+\end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \end{document}

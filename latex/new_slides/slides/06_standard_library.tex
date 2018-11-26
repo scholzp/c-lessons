@@ -29,12 +29,15 @@
 
 \maketitle
 
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}{Contents}
 	\tableofcontents
 \end{frame}
 
+%-------------------------------------------------------------------------------------------------
 \section{Do not reinvent the wheel}
-\subsection{}
+%-------------------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]{The Hitchhiker's Guide to the standard library}
 	Many of the problems you will be working on have already been solved.\\
@@ -54,13 +57,17 @@
 	After compilation, \textit{gcc} will link your program with the C library.\\
 \end{frame}
 
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}{Linking happens}
 	\centering
 	\tikzgraphic{.9}{\footnotesize}
 \end{frame}
 
+%-------------------------------------------------------------------------------------------------
 \section{Useful headers}
-\subsection{}
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{assert.h}
 	 \begin{itemize}
 	 	\item Contains the \textit{assert()} macro, witch evaluates the truth value of an expression
@@ -76,6 +83,9 @@ scanf("%d", &input);
 assert(input < 10);
 \end{lstlisting}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{math.h}
 	\begin{itemize}
 		\item Declares a lot of mathematical functions
@@ -87,6 +97,9 @@ assert(input < 10);
 gcc main.c -lm
 \end{lstlisting}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{stdio.h}
 	\begin{itemize}
 		\item Declares the basic functions to read and write data
@@ -101,6 +114,9 @@ puts("Hello World!");
 /* Equivalent to printf("Hello World!\n") */
 \end{lstlisting}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}{stdlib.h}
 	This probably is the most powerful header providing various different functionalities. Here is just an excerpt:
 	\begin{itemize}
@@ -112,6 +128,9 @@ puts("Hello World!");
 	\end{itemize}
 		\dots and more things you have not even heard of (yet)
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}{string.h}
 	\begin{uncoverenv}<2->
 		Wait! Strings? \\ \ \\
@@ -123,6 +142,9 @@ puts("Hello World!");
 		We will use some of the functions declared there in later lessons.
 	\end{uncoverenv}
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}{time.h}
 	\begin{itemize}
 		\item Data types to store different time formats
@@ -135,8 +157,10 @@ puts("Hello World!");
 	Measure the execution time of your programs to see how efficient they are!
 \end{frame}
 
+%-------------------------------------------------------------------------------------------------
 \section{Man page}
-\subsection{}
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Documentation}
 	Learning all the library functions is way less effective than knowing where to look them up quickly. \\
 	\textit{Man page} is a Unix tool containing documentation of programs, system calls and libraries - such as the C standard library. \\ \ \\
@@ -150,6 +174,9 @@ $ man printf
 \end{lstlisting}
 However, this describes the shell command \textit{printf}.
 \end{frame}
+
+%-------------------------------------------------------------------------------------------------
+
 \begin{frame}[fragile]{Effective use of \textit{man}}
 	Man has many sections, library functions are in \#3. \\
 	Write the section number between \textit{man} and the page:
@@ -166,6 +193,19 @@ $ man man
 \end{lstlisting}
 \end{frame}
 
-% nothing to do from here on
+%-------------------------------------------------------------------------------------------------
+\section{Related Task}
+%-------------------------------------------------------------------------------------------------
 
+\begin{frame}{Alea iacta est}
+    \href{http://fsr.github.io/c-lessons/exercises/14_alea_iacta_est.html}{Task as online:} \newline
+    To solve the following tasks, you need to use some functions that may be new to you.
+    No explanation is given on them, use man to find out how they work.
+
+    Write a program that simulates a dice using the rand() function.
+    \newline 
+    \newline
+    Experts: Simulate “real” randomness that cannot be recreated.
+\end{frame}
+%-------------------------------------------------------------------------------------------------
 \end{document}
