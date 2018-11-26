@@ -1,0 +1,171 @@
+\input{../templates/course_definitions}
+\input{../templates/course_information}
+
+\title{C-Lessons}
+\subtitle{Variables}
+\date{\today}
+
+\usetikzlibrary{tikzmark}
+
+
+\newcommand{\tikzgraphic}[2]{
+\begin{tikzpicture}[scale=#1,font=#2]
+	\node (main) [rectangle,draw,inner sep=1em] at (0,0){main.c};
+	\node (libc) [rectangle,draw,inner sep=1em] at (5,-3){libc.so};
+	\node (stdio) [rectangle,draw,inner sep=1em] at (5,0){stdio.h};
+	\node (maino) [rectangle,draw,inner sep=1em] at (0,-3){main.o};
+	\node (aout) [rectangle,draw,inner sep=1em] at (2.5,-5){a.out};
+	\node at (aout) [above=1.5em] {linking};
+	\draw[->] (main) -- (maino) node [left,align=right,midway,text width=5em] {compiling, assembling};
+	\draw[->,dotted] (main) -- (stdio) node [above,midway] {includes};
+	\draw[->,dotted] (stdio) -- (libc) node [right,midway] {implementation};
+	\draw[->] (libc) -- (aout);
+	\draw[->] (maino) -- (aout);
+\end{tikzpicture}
+}
+
+% the actual document
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Contents}
+	\tableofcontents
+\end{frame}
+
+\section{Do not reinvent the wheel}
+\subsection{}
+
+\begin{frame}[fragile]{The Hitchhiker's Guide to the standard library}
+	Many of the problems you will be working on have already been solved.\\
+	\bigskip
+	These solution are provided in \textit{libraries}. Prefer them over your own code!\\
+	\begin{itemize}
+		\item they are safer
+		\item they are more efficient
+		\item you do not have to do everything by yourself
+	\end{itemize}
+	\bigskip
+	We have already used the \textbf{C standard library} for i/o:
+\begin{lstlisting}[numbers=none]
+#include <stdio.h>	/* Anyone remember this? */
+\end{lstlisting}
+	This statement includes the \textit{header} file \textbf{stdio.h}.\\
+	After compilation, \textit{gcc} will link your program with the C library.\\
+\end{frame}
+
+\begin{frame}{Linking happens}
+	\centering
+	\tikzgraphic{.9}{\footnotesize}
+\end{frame}
+
+\section{Useful headers}
+\subsection{}
+\begin{frame}[fragile]{assert.h}
+	 \begin{itemize}
+	 	\item Contains the \textit{assert()} macro, witch evaluates the truth value of an expression
+	 	\item If it is true, nothing happens
+	 	\item Else the program aborts and an error message is printed
+	 \end{itemize} \ \\ \ \\
+	 $\rightarrow$ useful to avoid undefined behaviour / worse errors at runtime \\ \ \\
+	 We can also use it if we just want to test things:
+	 \begin{lstlisting}[numbers=none]
+unsigned int input;
+printf("Enter a one-digit decimal number:\n");
+scanf("%d", &input);
+assert(input < 10);
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{math.h}
+	\begin{itemize}
+		\item Declares a lot of mathematical functions
+		\item Finally you are able to calculate square roots, logarithms, etc.
+		\item Most of those functions have \textit{double} arguments and return values
+	\end{itemize} \ \\ \ \\
+	If you use functions from \textit{math.h}, add the \textit{-lm} as the \textbf{last} option to \textit{gcc} to avoid errors:
+	\begin{lstlisting}[numbers=none]
+gcc main.c -lm
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{stdio.h}
+	\begin{itemize}
+		\item Declares the basic functions to read and write data
+		\item You know \textit{printf()} and \textit{scanf()}, but there is more:
+		\item Characters, unprocessed and formatted strings
+		\item Command line I/O and file access
+		\item Many functions for high-level file management
+	\end{itemize} \ \\ \ \\
+	As an example, \textit{puts()} can be used instead of \textit{printf()} if you have a basic string without placeholders - '\textit{\textbackslash n}' is added automatically:
+	\begin{lstlisting}[numbers=none]
+puts("Hello World!");
+/* Equivalent to printf("Hello World!\n") */
+\end{lstlisting}
+\end{frame}
+\begin{frame}{stdlib.h}
+	This probably is the most powerful header providing various different functionalities. Here is just an excerpt:
+	\begin{itemize}
+		\item \textit{EXIT\_SUCCESS} and \textit{EXIT\_FAILURE} constants as an alternative to returning \textit{0} or \textit{1} at the end of \textit{main()}
+		\item Alternative ways to exit the program
+		\item Generation of pseudo-random numbers
+		\item Search and sorting function
+		\item Dynamic memory management
+	\end{itemize}
+		\dots and more things you have not even heard of (yet)
+\end{frame}
+\begin{frame}{string.h}
+	\begin{uncoverenv}<2->
+		Wait! Strings? \\ \ \\
+	\end{uncoverenv}
+	\begin{uncoverenv}<3->
+		Yes, there are strings in C. \\
+		They are just handled differently from what you would expect. \\ \ \\
+		\textit{string.h} is crucial if you want to work with C strings seriously. \\
+		We will use some of the functions declared there in later lessons.
+	\end{uncoverenv}
+\end{frame}
+\begin{frame}{time.h}
+	\begin{itemize}
+		\item Data types to store different time formats
+		\item Functions to get the calendar and cpu time
+		\item Functions to format time values
+		\item Functions to measure and calculate time differences
+	\end{itemize} \ \\ \ \\
+	Handling time usually is quite complicated, but with the help of \textit{time.h} it gets a lot easier.\\
+	\ \\
+	Measure the execution time of your programs to see how efficient they are!
+\end{frame}
+
+\section{Man page}
+\subsection{}
+\begin{frame}[fragile]{Documentation}
+	Learning all the library functions is way less effective than knowing where to look them up quickly. \\
+	\textit{Man page} is a Unix tool containing documentation of programs, system calls and libraries - such as the C standard library. \\ \ \\
+	To access a certain man page, just type:
+	\begin{lstlisting}[numbers=none, basicstyle=\itshape\small]
+$ man page
+\end{lstlisting} \ \\ \ \\
+Example for \textit{printf()}:
+	\begin{lstlisting}[numbers=none]
+$ man printf
+\end{lstlisting}
+However, this describes the shell command \textit{printf}.
+\end{frame}
+\begin{frame}[fragile]{Effective use of \textit{man}}
+	Man has many sections, library functions are in \#3. \\
+	Write the section number between \textit{man} and the page:
+	\begin{lstlisting}[numbers=none]
+$ man 3 printf
+\end{lstlisting} \ \\ \ \\
+	To get all pages \textit{printf} occurs in, use the \textit{-k} option:
+	\begin{lstlisting}[numbers=none]
+$ man -k printf
+\end{lstlisting} \ \\ \ \\
+	If you need more information on \textit{man} - it has its own man page:
+	\begin{lstlisting}[numbers=none]
+$ man man
+\end{lstlisting}
+\end{frame}
+
+% nothing to do from here on
+
+\end{document}
