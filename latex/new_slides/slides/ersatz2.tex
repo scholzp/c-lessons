@@ -46,7 +46,7 @@ int main(int argc, char** agrv) {
     \begin{lstlisting}[numbers=left]
 int main(int argc, char** agrv) {
 	int a = 0;
-	while(a <= argc){
+	while(a < argc){
         printf("Argument number %d is: %s\n", a, argv[a]);
         ++a; 
 	}
@@ -113,15 +113,15 @@ int main(int argc, char** agrv) {
     \begin{lstlisting}[numbers=left]
 int main(int argc, char** agrv) {
 	FILE *fp;
-	unsigned char buff;
+	int buff;
 	char * fname;
 	if(argc > 1)
         fname = argv[1];
 	//open file
 	if( access( fname, F_OK ) != -1 ) {
         fp = fopen(fname, "r");
-        buff = fgetc((FILE*) fp);
-        printf("The char which was read: %c", buff);
+        if((buff = fgetc((FILE*) fp)) != EOF)
+            printf("The char which was read: %c", buff);        
 	}else{
         printf("Could not open file\n");
         return -1;
@@ -133,7 +133,14 @@ int main(int argc, char** agrv) {
 \begin{frame}{Task}
     You already got a programm which can handle arguments.\newline
     \newline
+    Write a file test.csv with the contents: 4,5,6
+    \newline
     Now your programm should except to be called with a file name. Open this file, read and then print the first line. The ASCII-Code for the line ending used in POSIX Systems is 10.
+\end{frame}
+
+\begin{frame}{File format}
+    We define our file format to have the dimensions given in the first line.
+    The lines after th first line are values.\newline
 \end{frame}
 
 
