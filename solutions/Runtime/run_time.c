@@ -40,7 +40,7 @@ int main(void){
     int a = 99999999999 * (1/i);
   }
   end = clock();
-  printf("Div with invers clock:  %10ld\n", end - start);
+  printf("Div with inverse clock:  %10ld\n", end - start);
 
   // mod
   start = clock();
