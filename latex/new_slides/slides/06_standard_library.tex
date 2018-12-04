@@ -155,6 +155,7 @@ puts("Hello World!");
 	Handling time usually is quite complicated, but with the help of \textit{time.h} it gets a lot easier.\\
 	\ \\
 	Measure the execution time of your programs to see how efficient they are!
+	Be carefull as TICKS
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
@@ -194,10 +195,10 @@ $ man man
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
-\section{Related Task}
+\section{Related Tasks}
 %-------------------------------------------------------------------------------------------------
 
-\begin{frame}{Alea iacta est}
+\begin{frame}{Alea iacta est - Using rand()}
     \href{http://fsr.github.io/c-lessons/exercises/14_alea_iacta_est.html}{Task as online:} \newline
     To solve the following tasks, you need to use some functions that may be new to you.
     No explanation is given on them, use man to find out how they work.
@@ -206,6 +207,34 @@ $ man man
     \newline 
     \newline
     Experts: Simulate “real” randomness that cannot be recreated.
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+\begin{frame}{Know your architecture - Using sizeof()}
+    \href{http://fsr.github.io/c-lessons/exercises/15_know_your_architecture.html}{Task as online:} \newline
+    Write a program, that prints the size of every (or at least as much until you get bored) primitive datatype (in bytes).
+    Primitive datatypes in C are:
+    \begin{itemize}
+     \item char
+     \item int
+     \item float
+     \item double
+    \end{itemize}
+
+    Extra: Try to combine this types with long (for example long int).
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+\begin{frame}{Runtime of arithmetics - Using time.h}
+    Not a Task which is online, but it's \href{http://fsr.github.io/c-lessons/exercises/14_alea_iacta_est.html}{solution}: \newline
+    Write a Programm which takes the time for each basic arithmetic operation (Addition, Subtraction, Multiplikation, Division) and Modulo. Use \textit{int} 
+    as type so the calculated time is comparable. 
+    \newline
+    \newline
+    Hint: You might need to measure more than one calculation for each operation as modern processers are really fast.
+    \newline 
+    \newline
+    Experts: Compare the runtime for division with and without using the multiplcative inverse (calculate 100/m and 100*1/m for example). 
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 \end{document}
