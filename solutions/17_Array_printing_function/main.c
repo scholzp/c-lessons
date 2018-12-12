@@ -7,6 +7,9 @@
 * like with fixed sizes.
 * You have to declare the variable for the size before the declaration of the arry.
 * This wont work with C++. (As C++ don't has VLA-Support).
+* The size_t ist just an alias for an integer. It is defined in the stdlib and
+* is used for a better optical overview in the code. So size_t behaves just like
+* the normal datatype "int" but has a different name.
 */
 
 
