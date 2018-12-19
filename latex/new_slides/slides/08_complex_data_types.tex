@@ -113,23 +113,44 @@ pers_alice.contact.postcode = 15430;
 %-------------------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]{\textit{union}s}
-Unions are used to use the same memory for more than one variable. Only the member which was written last is valid. All other members use the same memory and are therefore corrupted. Unions are:
 	\begin{itemize}
-		\item Handled similar to \textit{struct}s in the way to access members
-		\item However: only one member can be activ
-		\item If you assign a value to a member, all other members become invalid
-	\end{itemize} \ \\ \ \\
-	Interface between a \textit{list-style} and a \textit{vector-style} implementation:
+		\item Size of the union is equal to the size of the largest member
+		\item All member variables share the same memory
+		\item Everytime you access a member, you access the same memory
+		\item If you assign a value to a member, all other members become invalid (as they share the same memory)
+	\end{itemize} \ \\ 
+	Let's assume the follwing union:
 	\begin{lstlisting}[numbers=none]
 union compound {
-	int list[3];
-	struct {
-		int x1, x2, x3;
-	} vector;
+	int a;      /* size = 32 bit */
+	float b;    /* size = 32 bit */
+	char c[8];  /* size = 64 bit */
 };
 \end{lstlisting}
-	The size of a union variable is equal to the size of its largest member.\\
-	$\rightarrow$ saving memory
+ $\rightarrow$ This union will be 64bit large.
+\end{frame}
+
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{\textit{union}s}
+Now let's see what happens, if we use the union:
+	\begin{lstlisting}[numbers=left]
+/* cool stuff */
+    union c u;
+	u.a = 0;
+	u.b = 0;
+	printf("C: %s\n", u.c);	
+	char str[8] = {'a','b','c','d','e','f','g','\0'}; 
+	strcpy(u.c, str); /* Function from string.h */
+	printf("A: %d\n", u.a);
+	printf("B: %f\n", u.b);	
+	printf("C: %s\n", u.c);	
+/* more cool stuff */ \end{lstlisting}
+And the Output will be:
+	\begin{lstlisting}[numbers=left]
+    C:                      // prints '\0'
+	A: 1684234849bvgvf
+    B: 16777999408082104352768.000000
+    C: abcdefg\end{lstlisting}
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
@@ -144,8 +165,7 @@ enum light {
 	RED,
 	YELLOW,
 	GREEN
-};
-    \end{lstlisting}
+};    \end{lstlisting}
 	Now you can assign the values \textit{red}, \textit{yellow} and \textit{green} to variables of the type \textit{enum light}. Internally they are represented as numbers ($red = 0$, $yellow = 1$ etc.), but
 	\begin{itemize}
 		\item Using the aliases is clear and fancy
@@ -163,8 +183,7 @@ enum workday {
 	TUESDAY,		/* 1 */
 	THURSDAY = 3,	/* 3 */
 	FRIDAY			/* 4 - implicit (predecessor + 1) */
-};
-\end{lstlisting}
+};\end{lstlisting}
 	However, this can confuse people $\rightarrow$ only use it if there is a good reason. \\ \ \\
 	Enumerations provide a nice way to define "global" constants:
 	\begin{lstlisting}[numbers=none]
@@ -205,26 +224,40 @@ typedef struct foo {
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
+\section{Related Task}
+%-------------------------------------------------------------------------------------------------
+\begin{frame}{Cristmas Task}
+    \href{https://github.com/scholzp/c-lessons/tree/master/solutions/Santas_sledge}{Solution to this task}
+    \newline
+    Christmas Task:
+    Write a program, that calculates if the reindeers of santas sledge have enough pullforce to pull the weight of the presents.
+    Therefor we need 3 Structs (for example data see next slide):
+    \begin{itemize}
+     \item struct reindeer, that contains age, gender and pullforce as members
+     \item struct present, that contains weight and price as members
+     \item struct sledge, that contains max. 8 reindeers, max. 20 presents and a maxTransportWeight as members
+    \end{itemize}
+    For the gender of the reindeer use an enum with m or w.\newline\newline
+    If the reindeers dont have the pullforce to pull all the presents there should also be printed how many kilos are left. So santa knows how many and which of his reindeers he has to add.
 
-\begin{frame}{Never use \textit{typedef}.}
-	\LARGE
-	\centering
-	Please, avoid using \textit{typedef}.\footnotemark \ \\ \ \\
-	\normalsize
-	\flushleft
-	\begin{uncoverenv}<2->
-		Of course, there are situations in which the use of \textit{typedef} makes sense. BUT:
-		\begin{itemize}
-			\item Not in the C introduction course
-			\item Not for simple \textit{struct}s
-		\end{itemize}
-	\end{uncoverenv}
-	\footnotetext[1]{Seriously, never use \textit{typedef}.}
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
-\section{Related Task}
+\begin{frame}{Cristmas Task 2}
+    Examples data for struct presents:
+    \begin{itemize}
+     \item Computer: weight = 7kg, price = 850€
+     \item Bookshelf: weight = 55kg, price = 519€
+     \item Fridge: weight = 150kg, price = 750€
+    \end{itemize}
+    Expample data for reindeer:
+    \begin{itemize}
+     \item rudolph: age = 12, gender = m, pullforce = 50kg
+    \end{itemize}
+    Bonus: Santa also has to pay a 2 percent fee for his insurance of the worth of his cargo. Calculate the total insurance he has to pay!
+\end{frame}
 %-------------------------------------------------------------------------------------------------
+
 
 \begin{frame}{Circles}
     \href{http://fsr.github.io/c-lessons/exercises/21_Circles.html}{Task as online}
@@ -239,8 +272,8 @@ typedef struct foo {
     \newline
     Experts: Write a function that takes two circles as arguments and returns a circle that 
     goes through their centres.
-\end{frame}
 
+\end{frame}
 %-------------------------------------------------------------------------------------------------
 
 \end{document}
