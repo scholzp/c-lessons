@@ -67,11 +67,13 @@ int main(void) {
 
   // check if the deers have enough force to pull the sledge
   if (presentWeightSum <= pullForceSum) printf("The reindeers have enough force to pull the sledge\n");
-  else printf("The reindeers dont have enough force to pull the sledge\nYou should add more reindeers!\n\n");
+  else {
+    printf("The reindeers dont have enough force to pull the sledge\nYou should add more reindeers!\n");
+    printf("Force that is still needed: %i Kg\n\n", presentWeightSum-pullForceSum);
+  }
 
   printf("pullForce: %i Kg\n", pullForceSum);
   printf("presentWeightSum: %i Kg\n", presentWeightSum);
-  printf("force that is still needed: %i Kg\n", presentWeightSum-pullForceSum);
 
   //print the total price and calculate the insurance cost
   printf("\nTotal carried money worth: %f\n", presentPriceSum);
