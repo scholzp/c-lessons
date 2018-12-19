@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 
+/*
+* We want to write into the matrix, so we need the adress to do so.
+* Derefencing the address enables us to write in the memory pointed to.
+*/
 void init_matrix(size_t width, size_t height, int (*matrix)[height][width]){
   for(size_t y = 0; y < height; ++y){
     for(size_t x = 0; x < width; ++x){
@@ -10,6 +14,9 @@ void init_matrix(size_t width, size_t height, int (*matrix)[height][width]){
   }
 }
 
+/*
+* Simple pritn function
+*/
 void print_matrix(size_t width, size_t height, int matrix[height][width]){
   for(size_t y = 0; y < height; ++y){
     printf("| " );
@@ -20,6 +27,12 @@ void print_matrix(size_t width, size_t height, int matrix[height][width]){
   }
 }
 
+
+/*
+* This function multiplies two matrices and print the result matrix.
+* If we want to store it somewhere, we would have to use pointers as there
+* is no way to return a VLA
+*/
 void matrix_mult(size_t width_A, size_t height_A, size_t width_B, \
                 int A[height_A][width_A], int B[width_A][width_B])
 {
@@ -49,7 +62,7 @@ int main(void){
   */
 
   size_t height_A, width_A, width_B;
-  height_A = 4000;
+  height_A = 400;
   width_A  = 600;
   width_B  = 6;
 

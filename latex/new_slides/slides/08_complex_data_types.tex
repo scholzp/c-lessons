@@ -113,9 +113,10 @@ pers_alice.contact.postcode = 15430;
 %-------------------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]{\textit{union}s}
+Unions are used to use the same memory for more than one variable. Only the member which was written last is valid. All other members use the same memory and are therefore corrupted. Unions are:
 	\begin{itemize}
-		\item Similar to \textit{struct}s, handle them in the same way
-		\item However: only one member can be "active"
+		\item Handled similar to \textit{struct}s in the way to access members
+		\item However: only one member can be activ
 		\item If you assign a value to a member, all other members become invalid
 	\end{itemize} \ \\ \ \\
 	Interface between a \textit{list-style} and a \textit{vector-style} implementation:
