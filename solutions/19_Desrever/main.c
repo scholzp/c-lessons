@@ -12,8 +12,8 @@ int main(void) {
   // Initialiezing is important. Because we initialize the whole strings with
   //'\0', especial the reversed string, we don't need to bother with setting the
   // termination symbol when we copy (unsless the whole string is overwritten).
-  memset(input, '\0', BUFFER_SIZE);
-  memset(reversed, '\0', BUFFER_SIZE);
+  memset(input, '\0', BUFFER_SIZE * sizeof(input[0]));
+  memset(reversed, '\0', BUFFER_SIZE * sizeof(reversed[0]));
 
 
   fgets(input, BUFFER_SIZE, stdin);
