@@ -29,7 +29,7 @@ void print_matrix(size_t dim_x, size_t dim_y, int m[dim_x][dim_y]){
 int main(void){
   int arr[6] = {1, 2, 3, 4, 5, 6};
   int matrice[2][3] = { {1, 2, 3},
-                        {9, 8, 7}                    };
+                        {9, 8, 7}  };
 
   size_t size_first_elem = sizeof(arr[0]);
   print_int_array(sizeof(arr) /size_first_elem, arr);

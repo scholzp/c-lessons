@@ -36,9 +36,8 @@ struct matrix * createMatrix(size_t width, size_t height){
   struct matrix * result = malloc(sizeof (struct matrix));
   result->width  = width;
   result->height = height;
-  size_t matrixBytes = sizeof(double) * width * height;
-  result->values = malloc(matrixBytes);
-  memset(result->values, 0, matrixBytes);
+  size_t matrixElements = width * height;
+  result->values = calloc(matrixElements, sizeof(*result->values));
   return result;
 }
 

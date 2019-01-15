@@ -281,13 +281,14 @@ void *realloc(void *ptr, size_t size);
 	\begin{itemize}
 		\item \textit{ptr} is a pointer to a dynamically allocated memory block
 		\item \textit{size} is the wanted new size of the memory block
-		\item The return value is a pointer to the resized block
+		\item The return value is a pointer to the resized block 
 	\end{itemize} \ \\
 	\ \\
 	Note that the new \textit{size} can be greater or smaller than the old one!
 	\begin{itemize}
 		\item If it's smaller, you may lose some data at the end of the block
 		\item If it's greater, the block may be at a different location in the memory $\rightarrow$ \textit{ptr} is freed then, also the additional bytes are not initialized
+		\item Returns a nullpointer if it fails.
 	\end{itemize}
 \end{frame}
 
@@ -344,7 +345,7 @@ $ man string.h
     The number of elements in each vector is up to the user.
     \newline 
     \newline
-    Experts: Experts: do the same with two matrices.
+    Experts: Do the same with two matrices.
 \end{frame}
 
 %---------------------------------------------------------------------------------------------------------------------------
