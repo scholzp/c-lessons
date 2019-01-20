@@ -1,16 +1,74 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <math.h>
 
 #define BUFFER_SIZE 12
 
-enum bool{ FALSE = 0, TRUE = 1};
-
 struct tree_elem {
-  int value;
+  long value;
   struct tree_elem *right;
   struct tree_elem *left;
 };
+
+struct tree_elem **findFreeLeave(struct tree_elem *root){
+  if(root == NULL)
+    return NULL;
+  if(root->left == NULL)
+    return &root->left;
+  if(root->right == NULL)
+    return &root->right;
+  return NULL;
+}
+
+size_t maxDepth(struct tree_elem *root){
+  if(root == NULL){
+    return 0;
+  }else{
+    size_t leftDepth = maxDepth(root->left);
+    size_t rightDepth = maxDepth(root->right);
+    return  1 + (rightDepth > leftDepth ? rightDepth : leftDepth);
+  }
+}
+
+struct tree_elem **breadthSearchFirstEmtyLeave(struct tree_elem *root) {
+  if(root == NULL)
+    return NULL;
+  //List of tree_elem to check. Need two rotating ones.
+  struct tree_elem **List1 =
+                        malloc(sizeof(*List1) * pow(2, maxDepth(root)));
+  struct tree_elem **List2 =
+                        malloc(sizeof(*List2) * pow(2, maxDepth(root)));
+  struct tree_elem **currentList = List1;
+  struct tree_elem **nextList = List2;
+  size_t currentNumberOfElements = 1;
+  List1[0] = root;
+
+  struct tree_elem **result = NULL;
+
+  while (result == NULL) {
+    size_t index = 0;
+    for(size_t x = 0; x < currentNumberOfElements; ++x){
+      result = findFreeLeave(currentList[x]);
+      if(result != NULL)
+        break;
+      printf("Checked VALUE : %lu\n", currentList[x]->left->value );
+      printf("Checked VALUE : %lu\n", currentList[x]->right->value );
+      nextList[index    ] = currentList[x]->left;
+      nextList[index + 1] = currentList[x]->right;
+      index += 2;
+    }
+    currentNumberOfElements *= 2;
+    struct tree_elem **buff = currentList;
+    currentList = nextList;
+    nextList = buff;
+  }
+  free(List1);
+  free(List2);
+  return result;
+}
+
+
 
 int max (int *a, int n, int i, int j, int k) {
     int m = i;
@@ -64,10 +122,8 @@ void heapsort (int *a, int n) {
 
 struct tree_elem readTreeFromStdin (){
   struct tree_elem *root = malloc(sizeof(*root));
-  long number;
   char string[BUFFER_SIZE];
   char* notNumerical;
-  enum bool flag = FALSE;
   do {
     fgets(string, BUFFER_SIZE, stdin);
     string[strlen(string)-1]='\0';
@@ -79,7 +135,23 @@ struct tree_elem readTreeFromStdin (){
 }
 
 int main () {
-    struct tree_elem tree = readTreeFromStdin();
+    //struct tree_elem tree = readTreeFromStdin();
+    struct tree_elem root = {0, NULL, NULL};
+    struct tree_elem l = {1, NULL, NULL};
+    struct tree_elem r = {2, NULL, NULL};
+    struct tree_elem ll = {3, NULL, NULL};
+    struct tree_elem lr = {4, NULL, NULL};
+    struct tree_elem rl = {5, NULL, NULL};
+
+    root.left = &l;
+    root.right = &r;
+    l.left = &ll;
+    l.right = &lr;
+    r.left = &rl;
+
+    printf("Correct Pointer: %p\n", &r.right);
+    printf("Result Pointer %p\n", breadthSearchFirstEmtyLeave(&root));
+
     //
     // int n = sizeof a / sizeof a[0];
     // int i;
