@@ -3,6 +3,46 @@
 
 typedef struct list_elem *element_t;
 
+/*
+Ein deutscher Paketzusteller möchte herausfinden, wie viel Zeit eine frisch
+eingestellte Kraft gegenüber einer langjährigen Mitarbeiterin benötigt. Dafür
+möchte die Post ein C Programm, welches nacheinander Zustellzeiten in Minuten
+einließt. Die Mitarbeiter wurden über eine Woche hinweg überwacht und jetzt
+soll aus den Daten die durchschnittliche Zustellzeit berechnet werden.
+Paktebote A (Frischling) hat zum Zustellen von 30 Paketen folgende Zeiten benötigt.
+12
+23
+14
+4
+67
+23
+11
+34
+12
+34
+78
+12
+4
+2
+18
+43
+23
+13
+53
+32
+43
+67
+23
+12
+54
+23
+14
+51
+33
+8
+3
+*/
+
 struct list_elem{
   long value;
   element_t prev;
@@ -14,13 +54,6 @@ typedef struct list {
   element_t first;
   size_t size;
 }list_t;
-
-void createList(list_t **list){
-  (*list) = malloc(sizeof(**list));
-  (*list)->size = 0;
-  (*list)->first = NULL;
-  (*list)->last  = NULL;
-};
 
 void append(list_t *list, long element) {
   element_t new = malloc(sizeof(*new));
@@ -95,22 +128,25 @@ void printList(list_t *l) {
 
 
 int main(void) {
-  list_t *l;
-  createList(&l);
-  printf("%p\n", l);
+  list_t *list;
+  list = malloc(sizeof(*list));
+  list->size = 0;
+  list->first = NULL;
+  list->last  = NULL;
+  printf("%p\n", list);
 
-  append(l, 5);
-  printList(l);
-  append(l, 3);
-  printList(l);
-  append(l, 7);
-  printList(l);
-  pushFront(l, 9);
-  printList(l);
-  insertAtIndex(l, 0, 10);
-  printList(l);
+  append(list, 5);
+  printList(list);
+  append(list, 3);
+  printList(list);
+  append(list, 7);
+  printList(list);
+  pushFront(list, 9);
+  printList(list);
+  insertAtIndex(list, 0, 10);
+  printList(list);
 
 
-  destroyList(l);
+  destroyList(list);
   return 0;
 }
