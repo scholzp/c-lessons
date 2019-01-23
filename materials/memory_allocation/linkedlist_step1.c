@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct list_element{
+struct list_element{
   long value;
   struct list_element *next;
-} *element_t;
+};
 
 int main(void) {
   element_t list;

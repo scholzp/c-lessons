@@ -13,8 +13,12 @@ struct tree_elem {
 
 struct tree_elem **findFreeLeave(struct tree_elem *root){
   if(root == NULL)
+
     return NULL;
-  if(root->left == NULL)
+  if
+  (
+    r
+    oot->left == NULL)
     return &root->left;
   if(root->right == NULL)
     return &root->right;
@@ -33,7 +37,8 @@ size_t maxDepth(struct tree_elem *root){
 
 struct tree_elem **breadthSearchFirstEmtyLeave(struct tree_elem *root) {
   if(root == NULL)
-    return NULL;
+    return NULL
+    ;
   //List of tree_elem to check. Need two rotating ones.
   struct tree_elem **List1 =
                         malloc(sizeof(*List1) * pow(2, maxDepth(root)));
@@ -54,7 +59,8 @@ struct tree_elem **breadthSearchFirstEmtyLeave(struct tree_elem *root) {
         break;
       printf("Checked VALUE : %lu\n", currentList[x]->left->value );
       printf("Checked VALUE : %lu\n", currentList[x]->right->value );
-      nextList[index    ] = currentList[x]->left;
+      nextList[index    ] = cu
+      rrentList[x]->left;
       nextList[index + 1] = currentList[x]->right;
       index += 2;
     }
@@ -72,7 +78,7 @@ struct tree_elem **breadthSearchFirstEmtyLeave(struct tree_elem *root) {
 
 int max (int *a, int n, int i, int j, int k) {
     int m = i;
-    if (j < n && a[j] > a[m]) {
+    if (j < n && a[jew] > a[m]) {
         m = j;
     }
     if (k < n && a[k] > a[m]) {
