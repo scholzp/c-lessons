@@ -66,15 +66,17 @@
 
 %-------------------------------------------------------------------------------------------------
 
-\begin{frame}{N\"utzliche Flags des GCC}
-	Nützliche und weitverbreitete Tools die zum Debugging eingesetzt werden sind:
+\begin{frame}[fragile]{N\"utzliche Flags des GCC}
+	Nützliche Flags die zum Debugging eingesetzt werden sind:
 	\begin{itemize}
 		\item -Wunsed (zeigt ungenutze Variable, gilt als Warnung)
-		\item -Wall (zeigt [fast]alle Warnung)
+		\item -Wall (zeigt [fast] alle Warnung)
 		\item -Werror (behandelt Warnung als Fehler, so dass nicht compiliert wird)
 		\item -g (default Debugging Informationen) 
 		\item und viele mehr, siehe man gcc
 	\end{itemize}
+			\begin{lstlisting}[numbers=none]
+$ gcc <flag1> <flag2> <Dateiname>.c\end{lstlisting}
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
@@ -87,6 +89,7 @@ Die Ausgabe sollte wie folgt aussehen (wenn es eine Warnung gibt):
 \\
 \bigskip
 \includegraphics[width = \linewidth]{../img/gccWerror.png}
+Entfernt die Variable einfach und hebt euch den Code f\"ur sp\"ater auf.
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
@@ -108,7 +111,7 @@ $ sudo apt-get install gdb  #ubuntu\end{lstlisting}
 \section{Debugging mit GDB}
 %-------------------------------------------------------------------------------------------------
 \begin{frame}{GDB - Was ist das?}
-Der GDB oder GNU Debugger ist ein freies und sehr mächtiges Debugging-Werkzeug. Wenn sich ein Programm nicht wie erwartet verhält, kann man mit ihm dessen Abarbeitung Schritt für Schritt nachvollziehen, um herauszufinden, wo im Quelltext Fehler sein könnte. \\
+Der GDB oder GNU Debugger ist ein freies und sehr mächtiges Debugging-Werkzeug. Wenn sich ein Programm nicht wie erwartet verhält, kann man mit ihm dessen Abarbeitung Schritt für Schritt nachvollziehen, um herauszufinden, wo im Quelltext Fehler sein könnten. \\
 \bigskip
 Generell kann er für alle Fehlerarten (während der Laufzeit) eingesetzt werden. 
 \end{frame}
@@ -116,8 +119,8 @@ Generell kann er für alle Fehlerarten (während der Laufzeit) eingesetzt werden
 %-------------------------------------------------------------------------------------------------
 \begin{frame}{GDB Befehle}
 	\begin{itemize}
-		\item Wenn gdb ohne ein Programm gestartet wurde kann mit \textbf{file}  \textit{file\_name} eine geladen werden.
-		\item Mit \textbf{r[un]} kann das Programm innerhalb von gdb ausgeführt werden.\\
+		\item Wenn GDB ohne ein Programm gestartet wurde kann mit \textbf{file}  \textit{file\_name} eins geladen werden.
+		\item Mit \textbf{r[un]} kann das Programm innerhalb von GDB ausgeführt werden.\\
 		Als ersten Schritt sollte das Programm so einmal abgearbeitet werden, um genauere Details zum Fehler zu erhalten. Alternativ kann mit \textbf{start} zum Einstiegspunkt (erste Zeile in main) gesprungen werden.
 		\item Haltepunkte (Breakpoints) können mit \textbf{b[reak]} \textit{line\_number} oder \textbf{b[reak]} \textit{function\_name} gesetzt werden.\\
 		An der vermuteten Stelle des Bugs im Quelltext sollte begonnen werden.
@@ -130,13 +133,13 @@ Generell kann er für alle Fehlerarten (während der Laufzeit) eingesetzt werden
 
 \begin{frame}{...wenn man den Breakpoint dann einmal erreicht hat.}
 	\begin{itemize}
-		\item \textbf{n[ext]} f\"uhrt nur die nächste Zeile des Prrgramms aus.
-		\item \textbf{s[tep]} f\"urht die nächste Anweisung aus.
-		\item Um das Programm bis zum n\"achsten Breakpoint ausführen zu lassen, kann \textbf{c[ontinue]} genutzt werden.
+		\item \textbf{n[ext]} f\"uhrt nur die n\"achste Zeile des Prrgramms aus.
+		\item \textbf{s[tep]} f\"urht die n\"achste Anweisung aus.
+		\item Um das Programm bis zum n\"achsten Breakpoint ausf\"uhren zu lassen, kann \textbf{c[ontinue]} genutzt werden.
 		\item Mit \textbf{backtrace} oder \textbf{bt} k\"onnen die aufgerufenen Funktionen angezeigt werden.\\
-		\item Um den Quelltext auszugeben ab eine bestimmten Zeile, kann \textbf{l[ist] Startzeilennummer} genutzt werden.
+		\item Um den Quelltext ab einer bestimmten Zeile auszugeben, kann \textbf{l[ist] Startzeilennummer} genutzt werden.
 		\\\ \\
-		\item Wenn nur die \textit{Enter-Taste} gedrückt wird, wird der zuletzt eingegebene Befehl ausgeführt.
+		\item Wenn nur die \textit{Enter-Taste} gedr\"uckt wird, wird der zuletzt eingegebene Befehl ausgef\"uhrt.
 	\end{itemize}
 \end{frame}
 
@@ -167,17 +170,25 @@ Breakpoint 13 at 0xdeadbeef: file main.c, line 42.
 \begin{frame}{Eine kleine Zusammenfassung}
 		\begin{tabular}{|l|l|}
 			\hline
-			\textbf{file} & L\"adt Programm\\\hline
-			\textbf{r[un]} & F\"uhrt ein Programm aus\\\hline
+			\textbf{file} & L\"adt Programm\\
+			\hline
+			\textbf{r[un]} & F\"uhrt ein Programm aus\\
+			\hline
 			\textbf{start} & Führt die erste Instruktion eines Programms aus\\\hline
 			\textbf{b[reak]} & Setzt einen Breakpoint\\\hline
-			\textbf{p[rint]} & Gibt Variable aus\\\hline
-			\textbf{w[atch]} & Bei Ver\"anderung unterbreche und gebe Variable aus.\\\hline
-			\textbf{n[ext]} & F\"uhre n\"achste Zeile aus und unterbreche\\\hline
+			\textbf{p[rint]} & Gibt Variable aus\\
+			\hline
+			\textbf{w[atch]} & Bei Ver\"anderung unterbreche und gebe Variable aus.\\
+			\hline
+			\textbf{n[ext]} & F\"uhre n\"achste Zeile aus und unterbreche\\
+			\hline
 			\textbf{s[tep]} & F\"uhre n\"achsten Befehl aus und unterbreche\\\hline
-			\textbf{c[ontinue]} & F\"uhrt ein Programm bis zum n\"achsten Breakpoint aus\\\hline
-			\textbf{l[ist]} & Gibt Quelltext aus\\\hline
-			\textbf{backtrace} / \textbf{bt} & Gibt Aufrufhierarchi der Funktionen aus\\\hline
+			\textbf{c[ontinue]} & F\"uhrt ein Programm bis zum n\"achsten Breakpoint aus\\
+			\hline
+			\textbf{l[ist]} & Gibt Quelltext aus\\
+			\hline
+			\textbf{backtrace} / \textbf{bt} & Gibt Aufrufhierarchi der Funktionen aus\\
+			\hline
 			\textbf{q[uit]}  & Beendet GDB (und das darin ausgeführte Programm)\\\hline
 		\end{tabular}	
 \end{frame}
@@ -206,19 +217,18 @@ int power(int base, int exponent) {
 	return result;
 }\end{lstlisting}
 
-Wir haben hier eine Endlosschleife. Auf den ersten Blick ist aber alles in Ordnung und sollte funkionieren. Aber warum tut es das nicht? \\
-\bigskip
-Es fehlen die geschweiften Klammern nach dem while-Statement. Es wird nur result berechnet, nicht aber count inkrementiert.\\
-$\rightarrow$  Ein Klammernpaar nach dem while-Statement, das nach Zeile 6 geschlossen wird, löst das Problem.
+Wir haben hier eine Endlosschleife. Auf den ersten Blick ist aber alles in Ordnung und das Programm sollte funkionieren. Aber warum tut es das nicht? \\
+Es fehlen die geschweiften Klammern nach dem while-Statement. Es wird nur \textit{result} berechnet, nicht aber \textit{count} inkrementiert.\\
+$\rightarrow$  Ein Klammernpaar nach dem while-Statement, das nach Zeile 6 geschlossen wird, l\"ost das Problem.
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
 \section{Debugging mit Valgrind}
 %-------------------------------------------------------------------------------------------------
 \begin{frame}{Was ist Valgrind}
-Valgrind ist ein Framwork, welches verschiede Werkzeuge anbietet. Beispielsweise bietet es Werkzeuge um Bugs im Speicher- oder Threadmangemant zu finden. Wir befassen uns nur mit dem Speichertool, mit welchem wir selbst Fehler in Programmen aufdecken k\"onnen, die es nicht zum Absturz bringen.\\
+Valgrind ist ein Framwork, welches verschiede Werkzeuge anbietet. Beispielsweise bietet es Werkzeuge um Bugs im Speicher- oder Threadmangemant zu finden. Wir befassen uns nur mit dem Speichertool, mit welchem wir selbst Fehler in Programmen aufdecken k\"onnen, die keinen Absturz hervorrufen.\\
 \bigskip
-Weitere Informationen zu Valgrind können auf der offiziellen \href{http://valgrind.org/}{Seite} gefunden werden. 
+Weitere Informationen zu Valgrind k\"onnen auf der offiziellen \href{http://valgrind.org/}{Seite} gefunden werden. 
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 
@@ -231,7 +241,7 @@ Um weiter Informationen über Memory-Leaks zu erhalten:
 $ valgrind --leak-check=full <Programmname>\end{lstlisting}
 Wenn man nun noch mehr über die Quelle der Leaks erfahren möchte:
 \begin{lstlisting}[numbers=none,language=bash]
-$valgrind --leak-check=full --track-origins=yes <Prog.-name>\end{lstlisting}
+$ valgrind --leak-check=full --track-origins=yes <Prog-name>\end{lstlisting}
 
 Mehr Informationen zur Verwendung können auf der offiziellen \href{http://valgrind.org/docs/manual/quick-start.html}{Seite} von Valgrind gefunden werden.
 \end{frame}
@@ -240,10 +250,12 @@ Mehr Informationen zur Verwendung können auf der offiziellen \href{http://valgr
 Wir haben im letzten Kurs ein Programm mit Speicherbugs geschrieben. Dieses sollten wir eventuell noch fertigstellen, damit ihr ein gutes Beispiel habt. \\
 \bigskip
 Die Rede ist von der verketteten Liste. Falls ihr den Code nicht mehr habt, findet ihr in \href{https://github.com/scholzp/c-lessons/blob/master/materials/memory_allocation/dynmamicMemeory.c}{hier}.\\
-Nun versuchen wir den Fehler zu finden
+Nun versuchen wir den Fehler zu finden und zu beheben.
 \end{frame}
 %-------------------------------------------------------------------------------------------------
 \begin{frame}[fragile]{Möglicher Qutput}
+\begin{lstlisting}[numbers=none,language=bash]
+$ valgrind --leak-check=full --track-origins=yes <Prog-name>\end{lstlisting}
 \includegraphics[width = \linewidth]{../img/valgrind.png}
 \end{frame}
 %-------------------------------------------------------------------------------------------------
