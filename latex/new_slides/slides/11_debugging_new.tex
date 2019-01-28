@@ -56,8 +56,9 @@
 		\item valgrind
 		\item GDB
 		\item strace (werden wir nicht ausprobieren, nur Hinweis auf Existenz)
+		\item ...und viele mehr
 	\end{itemize}
-	Im folgenden sollen die Möglichkeiten deer Tools kurz angerissen werde.
+	Im folgenden sollen die Möglichkeiten der genannten Tools kurz angerissen werde.
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
@@ -106,11 +107,18 @@ $ sudo apt-get install gdb  #ubuntu\end{lstlisting}
 %-------------------------------------------------------------------------------------------------
 \section{Debugging mit GDB}
 %-------------------------------------------------------------------------------------------------
+\begin{frame}{GDB - Was ist das?}
+Der GDB oder GNU Debugger ist ein freies und sehr mächtiges Debugging-Werkzeug. Wenn sich ein Programm nicht wie erwartet verhält, kann man mit ihm dessen Abarbeitung Schritt für Schritt nachvollziehen, um herauszufinden, wo im Quelltext Fehler sein könnte. \\
+\bigskip
+Generell kann er für alle Fehlerarten (während der Laufzeit) eingesetzt werden. 
+\end{frame}
+
+%-------------------------------------------------------------------------------------------------
 \begin{frame}{GDB Befehle}
 	\begin{itemize}
 		\item Wenn gdb ohne ein Programm gestartet wurde kann mit \textbf{file}  \textit{file\_name} eine geladen werden.
 		\item Mit \textbf{r[un]} kann das Programm innerhalb von gdb ausgeführt werden.\\
-		Als ersten Schritt sollte das Programm so einmal abgearbeitet werden, um genauere Details zum Fehler zu erhalten.
+		Als ersten Schritt sollte das Programm so einmal abgearbeitet werden, um genauere Details zum Fehler zu erhalten. Alternativ kann mit \textbf{start} zum Einstiegspunkt (erste Zeile in main) gesprungen werden.
 		\item Haltepunkte (Breakpoints) können mit \textbf{b[reak]} \textit{line\_number} oder \textbf{b[reak]} \textit{function\_name} gesetzt werden.\\
 		An der vermuteten Stelle des Bugs im Quelltext sollte begonnen werden.
 		\item Mit \textbf{p[rint]} \textit{identifier} können Werte angezeigt werden.
@@ -120,13 +128,13 @@ $ sudo apt-get install gdb  #ubuntu\end{lstlisting}
 
 %-------------------------------------------------------------------------------------------------
 
-\begin{frame}{Once you're at a breakpoint}
+\begin{frame}{...wenn man den Breakpoint dann einmal erreicht hat.}
 	\begin{itemize}
 		\item \textbf{n[ext]} f\"uhrt nur die nächste Zeile des Prrgramms aus.
 		\item \textbf{s[tep]} f\"urht die nächste Anweisung aus.
 		\item Um das Programm bis zum n\"achsten Breakpoint ausführen zu lassen, kann \textbf{c[ontinue]} genutzt werden.
 		\item Mit \textbf{backtrace} oder \textbf{bt} k\"onnen die aufgerufenen Funktionen angezeigt werden.\\
-		Alle Funktionen die bis zum jetzigen Punk aufgerufen wurden, werden angezeigt.
+		\item Um den Quelltext auszugeben ab eine bestimmten Zeile, kann \textbf{l[ist] Startzeilennummer} genutzt werden.
 		\\\ \\
 		\item Wenn nur die \textit{Enter-Taste} gedrückt wird, wird der zuletzt eingegebene Befehl ausgeführt.
 	\end{itemize}
@@ -155,24 +163,115 @@ Breakpoint 13 at 0xdeadbeef: file main.c, line 42.
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
+
 \begin{frame}{Eine kleine Zusammenfassung}
 		\begin{tabular}{|l|l|}
 			\hline
 			\textbf{file} & L\"adt Programm\\\hline
 			\textbf{r[un]} & F\"uhrt ein Programm aus\\\hline
+			\textbf{start} & Führt die erste Instruktion eines Programms aus\\\hline
 			\textbf{b[reak]} & Setzt einen Breakpoint\\\hline
 			\textbf{p[rint]} & Gibt Variable aus\\\hline
 			\textbf{w[atch]} & Bei Ver\"anderung unterbreche und gebe Variable aus.\\\hline
 			\textbf{n[ext]} & F\"uhre n\"achste Zeile aus und unterbreche\\\hline
 			\textbf{s[tep]} & F\"uhre n\"achsten Befehl aus und unterbreche\\\hline
 			\textbf{c[ontinue]} & F\"uhrt ein Programm bis zum n\"achsten Breakpoint aus\\\hline
+			\textbf{l[ist]} & Gibt Quelltext aus\\\hline
 			\textbf{backtrace} / \textbf{bt} & Gibt Aufrufhierarchi der Funktionen aus\\\hline
+			\textbf{q[uit]}  & Beendet GDB (und das darin ausgeführte Programm)\\\hline
 		\end{tabular}	
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+\begin{frame}{...und ein Beispiel}
+Im Beispiel-Programm ist ein kleiner Fehler versteckt. Hier eine Idee, wie man vorgehen könnte:
+\begin{itemize}
+    \item F\"uhrt das Programm innerhalb von GDB einmal aus, um zu schauen, was der Fehler ist (es passiert nichts, beendet das Programm. Eventuell gibt es einen Hinweis..)
+    \item Mit \textbf{s[tep]} kann das Programm schrittweise abgearbeitet werden, wenn man keine Idee hat, wo man anfangen kann. (Bei großen Programmen eventuell unpraktisch)
+    \item Hat man eine verdächtige Stelle gefunden, bietet es sich an den Quelltext mit \textbf{l[ist] Startzeilennummer} anzusehen.
+    \item Falls nötig entsprechende Variablen und deren Ver\"anderung mit \textbf{p[int] idendifier} ansehen. 
+\end{itemize}
+EIN HINWEIS: Mit der Tastenkombination \texttt{strg+C} kann man laufende Programme (im Terminal) beenden. \\
+Bitte nicht auf die n\"achste Folie schauen, da steht die Lösung.
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]{Die Auflösung}
+\begin{lstlisting}
+int power(int base, int exponent) {
+	int result = 1;
+	int count  = 0;
+	while(count < exponent) % {
+		result *= base;     %  
+		++count;            % }
+	return result;
+}\end{lstlisting}
+
+Wir haben hier eine Endlosschleife. Auf den ersten Blick ist aber alles in Ordnung und sollte funkionieren. Aber warum tut es das nicht? \\
+\bigskip
+Es fehlen die geschweiften Klammern nach dem while-Statement. Es wird nur result berechnet, nicht aber count inkrementiert.\\
+$\rightarrow$  Ein Klammernpaar nach dem while-Statement, das nach Zeile 6 geschlossen wird, löst das Problem.
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------
-\begin{frame}{Ein kleines Beispiel}
-Im Beispiel-Programm sind 2 kleine Fehler versteckt, die das Programm zum Absturz bringen. Versucht einmal, diese beiden Fehler mit GDB und dem Compiler zu finden. Hier eine Idee, wie man vorgehen könnte:
+\section{Debugging mit Valgrind}
+%-------------------------------------------------------------------------------------------------
+\begin{frame}{Was ist Valgrind}
+Valgrind ist ein Framwork, welches verschiede Werkzeuge anbietet. Beispielsweise bietet es Werkzeuge um Bugs im Speicher- oder Threadmangemant zu finden. Wir befassen uns nur mit dem Speichertool, mit welchem wir selbst Fehler in Programmen aufdecken k\"onnen, die es nicht zum Absturz bringen.\\
+\bigskip
+Weitere Informationen zu Valgrind können auf der offiziellen \href{http://valgrind.org/}{Seite} gefunden werden. 
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]{Den Memory check von Valgrind verwenden}
+Nachdem das Programm mit Debugginginformationen kompiliert wurde, kann man valgrind starten und das Programm als Argument übergben:
+\begin{lstlisting}[numbers=none,language=bash]
+$ valgrind <Programmname>\end{lstlisting}
+Um weiter Informationen über Memory-Leaks zu erhalten:
+\begin{lstlisting}[numbers=none,language=bash]
+$ valgrind --leak-check=full <Programmname>\end{lstlisting}
+Wenn man nun noch mehr über die Quelle der Leaks erfahren möchte:
+\begin{lstlisting}[numbers=none,language=bash]
+$valgrind --leak-check=full --track-origins=yes <Prog.-name>\end{lstlisting}
+
+Mehr Informationen zur Verwendung können auf der offiziellen \href{http://valgrind.org/docs/manual/quick-start.html}{Seite} von Valgrind gefunden werden.
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Wir probieren es aus...}
+Wir haben im letzten Kurs ein Programm mit Speicherbugs geschrieben. Dieses sollten wir eventuell noch fertigstellen, damit ihr ein gutes Beispiel habt. \\
+\bigskip
+Die Rede ist von der verketteten Liste. Falls ihr den Code nicht mehr habt, findet ihr in \href{https://github.com/scholzp/c-lessons/blob/master/materials/memory_allocation/dynmamicMemeory.c}{hier}.\\
+Nun versuchen wir den Fehler zu finden
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Möglicher Qutput}
+\includegraphics[width = \linewidth]{../img/valgrind.png}
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+
+\begin{frame}[fragile]{Heap Summary}
+\includegraphics[width = \linewidth]{../img/heapSummary.png}
+\begin{itemize}
+ \item Statistiken zum Auf dem Heap allokierten Speicher
+ \item Backtracing der Funktionsaufrufe in denen Speicher verlorengegangen ist
+\end{itemize}
+
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Leak Summary}
+\includegraphics[width = \linewidth]{../img/leakSummary.png}
+\begin{itemize}
+ \item Ist die zusammenfassende Statistik
+ \item definitily lost: Speicher auf den von Pointern direkt gezeigt wurde
+ \item indirectly lost: Speicher auf den von Pointer über Pointer indirekt gezeigt wurde.
+ \item Im Falle von Fehlern durch das Verwenden von uninitialisierten Variablen wird zusätzlich gewarnt. 
+\end{itemize}
+Ebenfalls auf der offiziellen Seite wird noch einmal genau erklärt, was die einzelnen Angaben bedeuten.
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+\section{Aufgabe}
+%-------------------------------------------------------------------------------------------------
+\begin{frame}{Zum Ausprobieren}
+Im Beispiel-Programm sind 2 kleine Fehler versteckt, die das Programm zum Absturz bringen. Versucht einmal, diese beiden Fehler mit GDB, valgrind und dem Compiler zu finden. Hier eine Idee, wie man vorgehen könnte:
 \begin{itemize}
  \item F\"uhrt das Programm einmal aus, um zu schauen, was der Fehler ist (es sollte abstürzen)
  \item Lasst euch einen Backtrace anzeigen, um die Funktionsaufrufe nachzuvollziehen.
@@ -182,7 +281,6 @@ Im Beispiel-Programm sind 2 kleine Fehler versteckt, die das Programm zum Abstur
  Bitte nicht auf die n\"achste Folie schauen, da steht die Lösung. 
 \end{frame}
 %-------------------------------------------------------------------------------------------------
-
 \begin{frame}[fragile]{Und die Aufl\"osung}
 Beide Fehler sind in dieser kleinen Funktion:
 \begin{lstlisting}
@@ -196,6 +294,24 @@ In Zeile 2: Kein Vergleich, sondern Zuweisung. Sollte n == 0. sein\\
 In Zeile 4: Kein Dekrementieren um Abbruchbedingungen zu erreichen. Sollte a(n-1) sein.
 \end{frame}
 %-------------------------------------------------------------------------------------------------
-\section{Debugging mit valgrind}
+\begin{frame}[fragile]{Und die Aufl\"osung}
+Beide Fehler sind in dieser kleinen Funktion:
+\begin{lstlisting}
+void a(int n){
+  if(n = 0)
+    return;
+  a(n);
+}\end{lstlisting}
+In main() wird d(), in d() wird c(), in c() wird b() und in d() wird a() aufgerufen. Die Funktion a() ruft sich selbst rekursiv auf. Sie hat folgende Fehler, die zu einer unendlichen Rekursion und damit wegen ausgehenden Stackspeicher zu einem Absturz f\"uhren:\\
+In Zeile 2: Kein Vergleich, sondern Zuweisung. Sollte n == 0. sein\\
+In Zeile 4: Kein Dekrementieren um Abbruchbedingungen zu erreichen. Sollte a(n-1) sein.
+\end{frame}
+%-------------------------------------------------------------------------------------------------
+\begin{frame}[fragile]{Noch mehr Bugs...}
+Im Ordner \href{https://github.com/scholzp/c-lessons/tree/master/materials}{Materials} in diesem Repository befindet sich Ordner 1\_* bis 6\_* (* ist eine Wildcard) mit verbuggtem Code. \\
+\bigskip
+Viel Erfolg...
+\end{frame}
+%-------------------------------------------------------------------------------------------------
 
 \end{document}
