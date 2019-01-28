@@ -294,19 +294,6 @@ In Zeile 2: Kein Vergleich, sondern Zuweisung. Sollte n == 0. sein\\
 In Zeile 4: Kein Dekrementieren um Abbruchbedingungen zu erreichen. Sollte a(n-1) sein.
 \end{frame}
 %-------------------------------------------------------------------------------------------------
-\begin{frame}[fragile]{Und die Aufl\"osung}
-Beide Fehler sind in dieser kleinen Funktion:
-\begin{lstlisting}
-void a(int n){
-  if(n = 0)
-    return;
-  a(n);
-}\end{lstlisting}
-In main() wird d(), in d() wird c(), in c() wird b() und in d() wird a() aufgerufen. Die Funktion a() ruft sich selbst rekursiv auf. Sie hat folgende Fehler, die zu einer unendlichen Rekursion und damit wegen ausgehenden Stackspeicher zu einem Absturz f\"uhren:\\
-In Zeile 2: Kein Vergleich, sondern Zuweisung. Sollte n == 0. sein\\
-In Zeile 4: Kein Dekrementieren um Abbruchbedingungen zu erreichen. Sollte a(n-1) sein.
-\end{frame}
-%-------------------------------------------------------------------------------------------------
 \begin{frame}[fragile]{Noch mehr Bugs...}
 Im Ordner \href{https://github.com/scholzp/c-lessons/tree/master/materials}{Materials} in diesem Repository befindet sich Ordner 1\_* bis 6\_* (* ist eine Wildcard) mit verbuggtem Code. \\
 \bigskip
